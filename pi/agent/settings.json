@@ -1,9 +1,9 @@
 {
   "lastChangelogVersion": "0.82.1",
-  "theme": "dark",
-  "defaultProvider": "yunwu",
-  "defaultModel": "claude-fable-5:floor",
-  "defaultThinkingLevel": "medium",
+  "theme": "gold-noir",
+  "defaultProvider": "deepseek",
+  "defaultModel": "deepseek-v4-flash",
+  "defaultThinkingLevel": "high",
   "defaultProjectTrust": "ask",
   "packages": [
     "npm:pi-web-access",
