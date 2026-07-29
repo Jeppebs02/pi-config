@@ -3,5 +3,9 @@
   "theme": "dark",
   "defaultProvider": "yunwu",
   "defaultModel": "claude-fable-5:floor",
-  "defaultThinkingLevel": "medium"
+  "defaultThinkingLevel": "medium",
+  "defaultProjectTrust": "ask",
+  "packages": [
+    "npm:pi-web-access"
+  ]
 }
