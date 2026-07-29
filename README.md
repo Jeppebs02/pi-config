@@ -23,8 +23,8 @@ pi-config/
 ```
 
 `auth.json` is **never committed**. Pi writes it locally on `/login`, and it's excluded via
-`.gitignore`. If you need to seed the `yunwu` provider's key, set the `YUNWU_API_KEY`
-environment variable instead — see [Providers](#providers) below.
+`.gitignore`. It's also where custom provider keys (`yunwu`, etc.) can live instead of an
+env var — see [Providers](#providers) below.
 
 ## Install
 
@@ -63,12 +63,35 @@ npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 
 - `api`: `openai-completions`
 - `baseUrl`: `https://yunwu.ai/v1`
-- `apiKey`: reads the `YUNWU_API_KEY` environment variable (pi resolves `apiKey` values as
-  env var names, literal strings, or `!shell commands` — see
-  [pi's models.json docs](https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/docs/models.md))
+- `apiKey`: `"YUNWU_API_KEY"` — this is only the **fallback** used if no credential is found
+  earlier in pi's resolution order
 - `models`: currently just `claude-fable-5:floor`
 
-Set the key in your shell profile before running `pi`:
+### Setting the yunwu key
+
+Pi resolves credentials in this order (see
+[docs/providers.md](https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/docs/providers.md#resolution-order)):
+
+1. `--api-key` CLI flag
+2. `~/.pi/agent/auth.json` entry
+3. Environment variable
+4. The literal `apiKey` value in `models.json`
+
+`auth.json` isn't limited to built-in providers — it's looked up by provider id, so a
+`yunwu` entry works the same way `anthropic` or `openai` entries do for `/login`. It's
+already gitignored and written with `0600` permissions, so this is the recommended spot
+for the key instead of a shell-profile env var:
+
+```json
+// ~/.pi/agent/auth.json
+{
+  "yunwu": { "type": "api_key", "key": "sk-..." }
+}
+```
+
+`key` supports the same resolution tricks as `models.json`'s `apiKey`: a literal, `"$ENV_VAR"`
+interpolation, or a `"!command"` (e.g. `"!op read 'op://vault/item/yunwu'"` for a password
+manager). If you'd rather use a plain env var instead, that still works too:
 
 ```bash
 export YUNWU_API_KEY="sk-..."
