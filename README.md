@@ -9,13 +9,13 @@ pi's live global config.
 ```
 pi-config/
 ├── pi/
-│   ├── agent/
-│   │   ├── AGENTS.md      # global context file, loaded every session
-│   │   └── models.json    # custom providers — yunwu (openai-completions compat)
-│   ├── skills/            # global skills (Agent Skills standard)
-│   ├── prompts/           # global prompt templates (/name to expand)
-│   ├── extensions/        # global TypeScript extensions
-│   └── themes/            # global themes
+│   └── agent/
+│       ├── AGENTS.md      # global context file, loaded every session
+│       ├── models.json    # custom providers — yunwu (openai-completions compat)
+│       ├── skills/        # global skills (Agent Skills standard)
+│       ├── prompts/       # global prompt templates (/name to expand)
+│       ├── extensions/    # global TypeScript extensions
+│       └── themes/        # global themes
 ├── install.sh             # symlinks pi/ -> ~/.pi on Linux/macOS
 ├── install.ps1             # symlinks pi/ -> ~/.pi on Windows
 ├── .gitignore              # excludes auth.json and other local-only state
@@ -82,24 +82,6 @@ pi --list-models yunwu
 
 Built-in providers (Anthropic, OpenAI, etc.) still work as normal via `/login` or their
 usual API key env vars; `models.json` only adds `yunwu` alongside them.
-
-## Heads-up: skills/prompts/extensions/themes location
-
-`install.sh`/`install.ps1` link the whole `pi/` folder to `~/.pi`, so `pi/agent/` becomes
-`~/.pi/agent/` — that part matches pi's documented global config dir exactly. As of this
-writing, however, pi's own docs say global **skills, prompts, extensions, and themes** are
-discovered under `~/.pi/agent/{skills,prompts,extensions,themes}/`, not `~/.pi/{skills,...}/`.
-
-This repo keeps them as top-level siblings of `agent/` per the requested layout. If pi
-doesn't pick things up from `pi/skills/`, `pi/prompts/`, etc. on your installed version,
-either:
-
-- move those four folders under `pi/agent/` (i.e. `pi/agent/skills/`, ...), or
-- symlink `pi/agent` → `~/.pi/agent` instead of `pi` → `~/.pi` and adjust the install
-  scripts accordingly.
-
-Check `pi --version` / `/hotkeys` / the startup header (which lists loaded resources) to
-confirm what your version actually picks up.
 
 ## Pushing to GitHub
 
