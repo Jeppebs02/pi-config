@@ -8,6 +8,9 @@ pi/agent/trust.json
 # Pi-managed helper binaries (ripgrep, fd) — re-downloaded by pi, arch-specific
 pi/agent/bin/
 
+# Pi's own cache of the full built-in model catalog — auto-refreshed, not user config
+pi/agent/models-store.json
+
 # Downloaded package code — pi re-fetches these from the "packages" list in
 # settings.json on `pi install` / startup. Don't commit the equivalent of node_modules.
 pi/agent/npm/
