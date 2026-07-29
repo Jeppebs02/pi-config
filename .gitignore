@@ -1,0 +1,11 @@
+# Local-only credentials — never commit
+pi/agent/auth.json
+
+# Session data, if pi ever writes into this repo instead of the real ~/.pi
+pi/agent/sessions/
+pi/agent/trust.json
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp

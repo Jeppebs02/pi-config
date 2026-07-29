@@ -1,0 +1,35 @@
+{
+  "providers": {
+    "yunwu": {
+      "name": "Yunwu",
+      "baseUrl": "https://api.yunwu.ai/v1",
+      "api": "openai-completions",
+      "apiKey": "YUNWU_API_KEY",
+      "authHeader": true,
+      "models": [
+        {
+          "id": "gpt-4o",
+          "name": "GPT-4o (Yunwu)",
+          "reasoning": false,
+          "input": ["text", "image"],
+          "contextWindow": 128000,
+          "maxTokens": 16384,
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
+          "id": "claude-sonnet-4-5-20250929",
+          "name": "Claude Sonnet 4.5 (Yunwu)",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 200000,
+          "maxTokens": 16384,
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+          "compat": {
+            "supportsDeveloperRole": false,
+            "supportsReasoningEffort": false
+          }
+        }
+      ]
+    }
+  }
+}
