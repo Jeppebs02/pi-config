@@ -1,8 +1,8 @@
 {
   "lastChangelogVersion": "0.82.1",
   "theme": "gold-noir",
-  "defaultProvider": "deepseek",
-  "defaultModel": "deepseek-v4-flash",
+  "defaultProvider": "yunwu",
+  "defaultModel": "claude-fable-5:floor",
   "defaultThinkingLevel": "high",
   "defaultProjectTrust": "ask",
   "packages": [
