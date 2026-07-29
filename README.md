@@ -62,26 +62,67 @@ npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 `pi/agent/models.json` registers **yunwu** as a custom OpenAI-compatible provider:
 
 - `api`: `openai-completions`
-- `baseUrl`: `https://api.yunwu.ai/v1`
+- `baseUrl`: `https://yunwu.ai/v1`
 - `apiKey`: reads the `YUNWU_API_KEY` environment variable (pi resolves `apiKey` values as
   env var names, literal strings, or `!shell commands` — see
   [pi's models.json docs](https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/docs/models.md))
+- `models`: currently just `claude-fable-5:floor`
 
-Set it in your shell profile before running `pi`:
+Set the key in your shell profile before running `pi`:
 
 ```bash
 export YUNWU_API_KEY="sk-..."
 ```
 
-The model list in `models.json` is a starting point — edit the `id`s to match whatever
-models your yunwu account actually exposes, then confirm with:
+### Adding another model to yunwu
+
+Add an entry to the `models` array in `pi/agent/models.json`:
+
+```json
+{
+  "id": "some-model-id",
+  "name": "Some Model (Yunwu)",
+  "reasoning": true,
+  "input": ["text", "image"],
+  "contextWindow": 200000,
+  "maxTokens": 16384,
+  "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+}
+```
+
+Only `id` is strictly required — everything else has a default (see
+[pi's models.json docs](https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/docs/models.md#model-configuration)).
+The file reloads on `/model`, no restart needed. Confirm what's registered with:
 
 ```bash
 pi --list-models yunwu
 ```
 
+### Adding a second custom provider
+
+Add another key under `providers` in `pi/agent/models.json`, same shape:
+
+```json
+{
+  "providers": {
+    "yunwu": { "...": "..." },
+    "some-other-provider": {
+      "name": "Some Other Provider",
+      "baseUrl": "https://api.example.com/v1",
+      "api": "openai-completions",
+      "apiKey": "SOME_OTHER_API_KEY",
+      "authHeader": true,
+      "models": [{ "id": "model-id", "name": "Model (Some Other Provider)" }]
+    }
+  }
+}
+```
+
+`api` can be `openai-completions`, `openai-responses`, `anthropic-messages`, or
+`google-generative-ai` depending on what the provider actually speaks.
+
 Built-in providers (Anthropic, OpenAI, etc.) still work as normal via `/login` or their
-usual API key env vars; `models.json` only adds `yunwu` alongside them.
+usual API key env vars; `models.json` only adds custom ones alongside them.
 
 ## Pushing to GitHub
 
