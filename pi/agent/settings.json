@@ -8,6 +8,7 @@
   "packages": [
     "npm:pi-web-access",
     "npm:@dietrichgebert/ponytail",
-    "npm:@juicesharp/rpiv-ask-user-question"
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:pi-zentui"
   ]
 }
