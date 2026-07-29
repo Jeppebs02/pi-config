@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "0.82.1",
   "theme": "dark",
-  "defaultProvider": "deepseek",
-  "defaultModel": "deepseek-v4-pro",
-  "defaultThinkingLevel": "high"
+  "defaultProvider": "yunwu",
+  "defaultModel": "claude-fable-5:floor",
+  "defaultThinkingLevel": "medium"
 }
