@@ -147,6 +147,68 @@ Add another key under `providers` in `pi/agent/models.json`, same shape:
 Built-in providers (Anthropic, OpenAI, etc.) still work as normal via `/login` or their
 usual API key env vars; `models.json` only adds custom ones alongside them.
 
+## Editing pi's own config (via pi itself, or by hand)
+
+`~/.pi` is a symlink into this repo's `pi/` folder — not a copy. That means:
+
+- If you ask pi to edit `AGENTS.md`, add a skill, write a prompt template, or run
+  `pi config` to enable/disable a resource, it's writing directly into this git repo.
+- Nothing auto-commits. Those changes just sit as an uncommitted diff in
+  `C:\Users\jeppe\Documents\GitHub\pi-config` until you commit them.
+
+Workflow: make changes (by hand or by asking pi), then check in on the repo periodically:
+
+```bash
+cd C:\Users\jeppe\Documents\GitHub\pi-config
+git status
+git diff
+git add -A
+git commit -m "..."
+git push   # whenever you want to publish
+```
+
+There's a `/sync` prompt template (`pi/agent/prompts/sync.md`) that does the status/diff/
+commit dance for you from inside a `pi` session — just run `/sync`. It reviews the diff,
+summarizes it, and asks before committing; it never pushes on its own.
+
+Because `pi/agent/sessions/`, `auth.json`, `pi/agent/bin/`, `pi/agent/npm/`, and
+`pi/agent/git/` are all gitignored (see below), `git status` only surfaces changes to the
+stuff actually worth versioning: `AGENTS.md`, `models.json`, `settings.json`, skills,
+prompts, extensions, and themes.
+
+## Installing packages
+
+```bash
+pi install npm:@foo/bar
+pi install git:github.com/user/repo
+```
+
+`pi install` (without `-l`) writes an entry to the `packages` array in the **global**
+`~/.pi/agent/settings.json` — which, via the symlink, is `pi/agent/settings.json` in this
+repo. Unlike `auth.json`/`bin/`/session data, **`settings.json` is tracked**, specifically
+so the package list travels with the repo: clone this on another machine, run
+`install.ps1`/`install.sh`, start `pi`, and it installs any packages listed in
+`settings.json` automatically.
+
+The actual downloaded package code goes to `pi/agent/npm/` or `pi/agent/git/<host>/<path>`
+— those are gitignored (same idea as `node_modules`); only the reference in `settings.json`
+is committed.
+
+`settings.json` also holds machine-ish bits like `theme` and `lastChangelogVersion` — those
+will occasionally show up as noise in `git diff` when pi updates itself or you switch
+themes. That's expected; just fold them into whatever commit you're already making.
+
+```bash
+pi remove npm:@foo/bar
+pi list                # installed packages
+pi update --extensions # update all non-pinned packages
+pi config               # enable/disable resources from installed packages
+```
+
+See [pi's package docs](https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/docs/packages.md)
+for the full reference (git/local sources, pinning versions/refs, package filtering, and
+how to build your own package).
+
 ## Pushing to GitHub
 
 This repo is initialized locally. To publish it:

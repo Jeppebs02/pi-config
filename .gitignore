@@ -5,11 +5,13 @@ pi/agent/auth.json
 pi/agent/sessions/
 pi/agent/trust.json
 
-# Machine-local settings (theme, lastChangelogVersion, etc.) — noisy, not shared config
-pi/agent/settings.json
-
 # Pi-managed helper binaries (ripgrep, fd) — re-downloaded by pi, arch-specific
 pi/agent/bin/
+
+# Downloaded package code — pi re-fetches these from the "packages" list in
+# settings.json on `pi install` / startup. Don't commit the equivalent of node_modules.
+pi/agent/npm/
+pi/agent/git/
 
 # OS / editor cruft
 .DS_Store
