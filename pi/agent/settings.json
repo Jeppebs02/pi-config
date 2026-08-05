@@ -1,8 +1,8 @@
 {
   "lastChangelogVersion": "0.82.1",
   "theme": "gold-noir",
-  "defaultProvider": "yunwu",
-  "defaultModel": "claude-fable-5:floor",
+  "defaultProvider": "moonshotai",
+  "defaultModel": "kimi-k2.7-code",
   "defaultThinkingLevel": "high",
   "defaultProjectTrust": "ask",
   "packages": [
