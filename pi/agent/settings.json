@@ -1,9 +1,9 @@
 {
   "lastChangelogVersion": "0.84.0",
   "theme": "gold-noir",
-  "defaultProvider": "moonshotai",
-  "defaultModel": "kimi-k2.7-code",
-  "defaultThinkingLevel": "medium",
+  "defaultProvider": "deepseek",
+  "defaultModel": "deepseek-v4-pro",
+  "defaultThinkingLevel": "high",
   "defaultProjectTrust": "ask",
   "packages": [
     "npm:pi-web-access",
