@@ -3,7 +3,7 @@
   "theme": "gold-noir",
   "defaultProvider": "moonshotai",
   "defaultModel": "kimi-k2.7-code",
-  "defaultThinkingLevel": "high",
+  "defaultThinkingLevel": "medium",
   "defaultProjectTrust": "ask",
   "packages": [
     "npm:pi-web-access",
