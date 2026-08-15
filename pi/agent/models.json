@@ -17,6 +17,23 @@
           "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
         }
       ]
+    },
+    "orcarouter": {
+      "name": "OrcaRouter",
+      "baseUrl": "https://api.orcarouter.ai/v1",
+      "api": "openai-completions",
+      "apiKey": "ORCA_KEY",
+      "models": [
+        {
+          "id": "obsidian/Qwen3.8-27B",
+          "name": "Qwen3.8 27B (OrcaRouter)",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 262000,
+          "maxTokens": 8192,
+          "cost": { "input": 0.4, "output": 4.21, "cacheRead": 0, "cacheWrite": 0 }
+        }
+      ]
     }
   }
 }
