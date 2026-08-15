@@ -9,6 +9,7 @@
     "npm:pi-web-access",
     "npm:@dietrichgebert/ponytail",
     "npm:@juicesharp/rpiv-ask-user-question",
-    "npm:pi-zentui"
+    "npm:pi-zentui",
+    "npm:pi-lens"
   ]
 }
