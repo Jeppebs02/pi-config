@@ -36,15 +36,32 @@ cd ~/pi-config
 ./install.sh
 ```
 
-**Windows (PowerShell)**
+**Windows (PowerShell) — run as Administrator**
 
-Symlinks require Developer Mode (Settings → Update & Security → For developers) or an
-elevated (Administrator) shell.
+Right-click PowerShell → **Run as administrator**, then:
 
 ```powershell
 git clone <this-repo-url> $HOME\pi-config
 cd $HOME\pi-config
 .\install.ps1
+```
+
+Administrator is needed for two things:
+
+- **Windows Defender exclusion.** The `hack-skills` / `ctf-skills` docs contain
+  reverse-shell and web-shell payload examples that Defender's real-time protection
+  flags as malware (`Backdoor:*`) and silently deletes. `install.ps1` adds an
+  exclusion for the repo folder so the files survive. Only Administrator can call
+  `Add-MpPreference`.
+- **Symlink creation** — unless Developer Mode is enabled (Settings → Update &
+  Security → For developers), which lets the symlink step run without elevation.
+
+If you run it **without** Administrator, the script still creates the symlink (under
+Developer Mode) but prints a "run me as admin" warning and skips the Defender
+exclusion. You can add it later from an elevated shell:
+
+```powershell
+Add-MpPreference -ExclusionPath "$HOME\pi-config"
 ```
 
 Both scripts are idempotent: re-running them is a no-op if `~/.pi` already points at this

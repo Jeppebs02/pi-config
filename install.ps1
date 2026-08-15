@@ -1,10 +1,13 @@
 <#
 .SYNOPSIS
-    Symlinks this repo's pi\ folder to $HOME\.pi (Windows).
+    Symlinks this repo's pi\ folder to $HOME\.pi (Windows) and excludes the
+    repo from Windows Defender so the security-skill docs aren't quarantined.
 .NOTES
-    Creating a symlink on Windows requires either:
-      - Developer Mode enabled (Settings > Update & Security > For developers), or
-      - Running this script as Administrator.
+    Run this script as Administrator. Administrator is required to:
+      - add the Windows Defender exclusion (Add-MpPreference), and
+      - create the symlink (unless Developer Mode is enabled).
+    Without Administrator the Defender step is skipped and the hack-skills /
+    ctf-skills payload docs will keep getting deleted by real-time protection.
 #>
 
 $ErrorActionPreference = "Stop"
@@ -12,6 +15,19 @@ $ErrorActionPreference = "Stop"
 $RepoDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Src = Join-Path $RepoDir "pi"
 $Dest = Join-Path $HOME ".pi"
+
+# Are we elevated?
+$IsAdmin = ([Security.Principal.WindowsPrincipal] `
+    [Security.Principal.WindowsIdentity]::GetCurrent()
+).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+
+if (-not $IsAdmin) {
+    Write-Warning "Not running as Administrator - run me as admin."
+    Write-Warning "The Windows Defender exclusion will be skipped, so the security-skill"
+    Write-Warning "docs may be quarantined. Re-run this script from an elevated PowerShell:"
+    Write-Warning "  Right-click PowerShell > Run as administrator, then re-run install.ps1"
+    Write-Host ""
+}
 
 if (-not (Test-Path $Src)) {
     Write-Error "Source folder not found: $Src"
@@ -40,6 +56,29 @@ try {
 } catch {
     Write-Error "Failed to create symlink. Enable Developer Mode or re-run this script as Administrator.`n$_"
     exit 1
+}
+
+# Exclude the repo from Windows Defender. The hack-skills / ctf-skills docs
+# contain reverse-shell and web-shell payload examples that real-time
+# protection flags as malware (Backdoor:*) and deletes on sight.
+if ($IsAdmin) {
+    try {
+        $existing = (Get-MpPreference).ExclusionPath
+        if ($existing -contains $RepoDir) {
+            Write-Host "Defender exclusion already present for $RepoDir."
+        } else {
+            Add-MpPreference -ExclusionPath $RepoDir
+            Write-Host "Added Windows Defender exclusion for $RepoDir."
+        }
+    } catch {
+        Write-Warning "Could not add Windows Defender exclusion (is Defender present/enabled?).`n$_"
+        Write-Warning "Add it manually from an elevated shell:"
+        Write-Warning "  Add-MpPreference -ExclusionPath `"$RepoDir`""
+    }
+} else {
+    Write-Warning "Skipped Windows Defender exclusion (not Administrator)."
+    Write-Warning "Add it manually from an elevated shell:"
+    Write-Warning "  Add-MpPreference -ExclusionPath `"$RepoDir`""
 }
 
 $authPath = Join-Path $Src "agent\auth.json"
