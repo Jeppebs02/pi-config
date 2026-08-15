@@ -3,7 +3,7 @@
   "theme": "gold-noir",
   "defaultProvider": "orcarouter",
   "defaultModel": "obsidian/Qwen3.8-27B",
-  "defaultThinkingLevel": "high",
+  "defaultThinkingLevel": "medium",
   "defaultProjectTrust": "ask",
   "packages": [
     "npm:pi-web-access",
