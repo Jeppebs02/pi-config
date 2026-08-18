@@ -1,8 +1,8 @@
 {
   "lastChangelogVersion": "0.84.2",
   "theme": "gold-noir",
-  "defaultProvider": "orcarouter",
-  "defaultModel": "obsidian/Qwen3.8-27B",
+  "defaultProvider": "moonshotai",
+  "defaultModel": "kimi-k2.7-code",
   "defaultThinkingLevel": "medium",
   "defaultProjectTrust": "ask",
   "packages": [
