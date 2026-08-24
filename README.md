@@ -12,6 +12,7 @@ pi-config/
 │   └── agent/
 │       ├── AGENTS.md      # global context file, loaded every session
 │       ├── models.json    # custom providers — yunwu (openai-completions compat)
+│       ├── mcp.json       # MCP servers for the pi-mcp-adapter package (x64dbg/x32dbg)
 │       ├── skills/        # global skills (Agent Skills standard)
 │       ├── prompts/       # global prompt templates (/name to expand)
 │       ├── extensions/    # global TypeScript extensions
@@ -225,6 +226,79 @@ pi config               # enable/disable resources from installed packages
 See [pi's package docs](https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/docs/packages.md)
 for the full reference (git/local sources, pinning versions/refs, package filtering, and
 how to build your own package).
+
+## x64dbg / x32dbg MCP debugger access
+
+Exposes the x64dbg/x32dbg debuggers to pi via MCP so an agent can drive a debugging
+session (breakpoints, registers, memory, disassembly). Two halves:
+
+- **Pi side** (committed, travels with the repo): the `pi-mcp-adapter` package
+  (already in `settings.json`'s `packages`) and `pi/agent/mcp.json`.
+- **Debugger side** (machine-local, NOT in the repo): the `x64dbg-MCP-Server` plugin
+  and its auto-generated `mcp_config.json` auth tokens.
+
+### Committed config
+
+`pi/agent/mcp.json` registers both servers:
+
+```json
+{
+  "mcpServers": {
+    "x64dbg": { "type": "http", "url": "http://localhost:9094/", "auth": "bearer", "bearerTokenStore": true },
+    "x32dbg": { "type": "http", "url": "http://localhost:9095/", "auth": "bearer", "bearerTokenStore": true }
+  }
+}
+```
+
+No secrets here — tokens live in the OS credential store, bound to each server's URL
+(`bearerTokenStore: true`). The adapter package auto-installs on first pi start from
+the committed `settings.json` package list.
+
+### Setting up a new machine
+
+1. **Install the debugger plugin.** Copy the `x64dbg-MCP-Server` dist contents into the
+   x64dbg root so `x64/plugins/x64dbg-MCP-Server.dp64` and
+   `x32/plugins/x64dbg-MCP-Server.dp32` exist.
+2. **Get the auth tokens.** On first launch the plugin writes `mcp_config.json` next to
+   the binary (`release/x64/` and `release/x32/`):
+
+   ```json
+   { "IpAddress": "0.0.0.0", "Port": 9094, "AutoStart": true, "AuthToken": "32-hex-chars" }
+   ```
+
+   Ports: x64 = 9094, x32 = 9095. Either launch each debugger once and read the
+   generated token, or pre-create the file with a fresh random one:
+
+   ```bash
+   node -e "console.log(require('crypto').randomBytes(16).toString('hex'))"
+   ```
+
+3. **Store each token** (the committed config reads it from the credential store):
+
+   ```bash
+   printf '%s' '<token>' | pi-mcp-adapter token set x64dbg
+   printf '%s' '<token>' | pi-mcp-adapter token set x32dbg
+   ```
+
+   The token must match what the plugin wrote. If the plugin ever regenerates it (e.g.
+   the config file gets deleted), re-run `token set`.
+4. **Restart pi**, launch the debugger(s), verify with `/mcp` (panel) or by calling the
+   proxy tool: `mcp({ search: "..." })`. Servers connect lazily on first tool call.
+
+### CLI quirk: `token set` from a fresh clone
+
+`pi-mcp-adapter token set` fails when run from inside `node_modules` — Node's type
+stripping refuses `.ts` files under `node_modules` (also needs Node 22.18+). Run it
+from a throwaway copy outside instead:
+
+```bash
+mkdir -p /tmp/pi-mcp-cli
+cp -r <repo>/pi/agent/npm/node_modules/pi-mcp-adapter/* /tmp/pi-mcp-cli/
+cd /tmp/pi-mcp-cli && npm install --omit=dev
+printf '%s' '<token>' | node cli.js token set <server>
+```
+
+Stored records live in the OS credential store, so the copy is throwaway.
 
 ## Pushing to GitHub
 

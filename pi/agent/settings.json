@@ -10,6 +10,7 @@
     "npm:@dietrichgebert/ponytail",
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-zentui",
-    "npm:pi-lens"
+    "npm:pi-lens",
+    "npm:pi-mcp-adapter"
   ]
 }

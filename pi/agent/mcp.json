@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "x64dbg": {
+      "type": "http",
+      "url": "http://localhost:9094/",
+      "auth": "bearer",
+      "bearerTokenStore": true
+    },
+    "x32dbg": {
+      "type": "http",
+      "url": "http://localhost:9095/",
+      "auth": "bearer",
+      "bearerTokenStore": true
+    }
+  }
+}
