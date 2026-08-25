@@ -71,10 +71,19 @@ crashes:
 - **Windows**: a Scheduled Task named `ToiletPiSupervisor`, triggered at logon and at
   workstation unlock, set to restart on failure (999 retries, 1 minute apart — the retry
   counter resets on the next logon/unlock trigger, so in practice this never gives up).
+  It runs fully hidden — no console window appears, so there's nothing to accidentally
+  close. (It launches via a small generated VBScript wrapper at
+  `%LOCALAPPDATA%\ToiletPi\run-supervisor.vbs`, regenerated on every `install.ps1` run —
+  plain `cmd.exe`/`powershell -WindowStyle Hidden` either shows a window or can have its
+  child process killed when Task Scheduler tears down the job on exit.)
   ```powershell
-  Start-ScheduledTask -TaskName ToiletPiSupervisor   # start now
-  Get-ScheduledTask -TaskName ToiletPiSupervisor      # check state
+  Start-ScheduledTask -TaskName ToiletPiSupervisor       # start now
+  Get-ScheduledTask -TaskName ToiletPiSupervisor          # check state
+  Get-Process node -ErrorAction SilentlyContinue          # confirm it's actually running
   ```
+  Trigger is "at logon," not "at startup" — it starts when you log into Windows, not
+  before. For a normal desktop that boots to a login screen this is effectively the same
+  as "starts when the PC turns on."
 - **Linux**: a `systemd --user` service, `toilet-pi-supervisor.service`, enabled against
   `default.target` with `Restart=on-failure`, `RestartSec=5`, and start-rate-limiting
   disabled (`StartLimitIntervalSec=0`) so retries never get suppressed.

@@ -143,9 +143,26 @@ if (-not (Test-Path (Join-Path $ToiletPiDir "package.json"))) {
         $unlockTrigger.StateChange = 8
         $unlockTrigger.Enabled = $true
 
-        $action = New-ScheduledTaskAction -Execute "$env:ComSpec" `
-            -Argument "/d /c npm run supervisor" `
-            -WorkingDirectory $ToiletPiDir
+        # Run via a generated VBScript launcher instead of cmd.exe directly.
+        # WScript.Shell.Run(..., 0, False) starts the process with no visible
+        # window and detaches it cleanly; launching cmd.exe/npm directly would
+        # show a console window, and closing that window kills the supervisor.
+        # (powershell.exe -WindowStyle Hidden was not used here because its
+        # child process can get killed when Task Scheduler tears down the job
+        # object on the wrapper's exit -- this VBScript pattern doesn't have
+        # that problem.)
+        $LauncherDir = Join-Path $env:LOCALAPPDATA "ToiletPi"
+        New-Item -ItemType Directory -Path $LauncherDir -Force | Out-Null
+        $LauncherPath = Join-Path $LauncherDir "run-supervisor.vbs"
+        $vbsContent = @"
+Set objShell = CreateObject("WScript.Shell")
+objShell.CurrentDirectory = "$ToiletPiDir"
+objShell.Run "cmd /d /c npm run supervisor", 0, False
+"@
+        Set-Content -Path $LauncherPath -Value $vbsContent -Encoding Unicode
+
+        $wscriptPath = Join-Path $env:WINDIR "System32\wscript.exe"
+        $action = New-ScheduledTaskAction -Execute $wscriptPath -Argument "`"$LauncherPath`""
 
         $settings = New-ScheduledTaskSettingsSet `
             -RestartCount 999 `
@@ -168,9 +185,11 @@ if (-not (Test-Path (Join-Path $ToiletPiDir "package.json"))) {
             -Force -ErrorAction Stop | Out-Null
 
         Write-Host "Registered scheduled task '$ToiletPiTaskName' (runs 'npm run supervisor' from $ToiletPiDir)."
+        Write-Host "Runs fully hidden (no console window to accidentally close)."
         Write-Host "Triggers: at logon and at workstation unlock. Restarts on failure (999 retries, 1 min apart;"
         Write-Host "the counter resets on the next logon/unlock trigger)."
         Write-Host "Start it now with: Start-ScheduledTask -TaskName $ToiletPiTaskName"
+        Write-Host "Check it's actually running with: Get-Process node -ErrorAction SilentlyContinue"
     } catch {
         Write-Warning "Failed to register scheduled task '$ToiletPiTaskName'.`n$_"
     }
