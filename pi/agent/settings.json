@@ -11,6 +11,7 @@
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-zentui",
     "npm:pi-lens",
-    "npm:pi-mcp-adapter"
+    "npm:pi-mcp-adapter",
+    "https://github.com/mrexodia/toilet-pi"
   ]
 }

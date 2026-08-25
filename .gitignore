@@ -19,6 +19,12 @@ pi/web-search-cache/
 pi/agent/npm/
 pi/agent/git/
 
+# toilet-pi: machine connect URL + auth token are secrets — see docs/toilet-pi.md.
+# Commit only toilet-pi.json.example. toilet-pi-server.json (server admin token)
+# is included defensively in case the server is ever run locally for testing.
+pi/agent/toilet-pi.json
+pi/agent/toilet-pi-server.json
+
 # OS / editor cruft
 .DS_Store
 Thumbs.db

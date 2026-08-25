@@ -227,6 +227,17 @@ See [pi's package docs](https://github.com/badlogic/pi-mono/blob/main/packages/c
 for the full reference (git/local sources, pinning versions/refs, package filtering, and
 how to build your own package).
 
+## toilet-pi remote control
+
+[toilet-pi](https://github.com/mrexodia/toilet-pi) lets you watch and control `pi`
+sessions on this machine from a browser. It's vendored as a `pi` package (see
+[Installing packages](#installing-packages) above) — committed in `settings.json`,
+cloned by `pi` itself — and `install.ps1`/`install.sh` additionally register its
+supervisor process as a Windows Scheduled Task / systemd `--user` service so it keeps
+running in the background. See [docs/toilet-pi.md](docs/toilet-pi.md) for setup,
+connecting a machine via `/toilet-pi setup <machine-url>`, and an important note about
+treating the machine connect URL and server token as secrets.
+
 ## x64dbg / x32dbg MCP debugger access
 
 Exposes the x64dbg/x32dbg debuggers to pi via MCP so an agent can drive a debugging

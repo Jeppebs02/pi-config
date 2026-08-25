@@ -1,0 +1,4 @@
+{
+  "serverUrl": "wss://REPLACE_WITH_YOUR_TOILET_PI_MACHINE_CONNECT_URL/ws?token=REPLACE_WITH_TOKEN",
+  "token": "REPLACE_WITH_TOKEN"
+}
