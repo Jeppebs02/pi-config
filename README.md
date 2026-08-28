@@ -307,6 +307,121 @@ implementations don't serialize through the same UI lock — so only one should 
 To revert: add the package back to `settings.json`'s `packages` and delete
 `pi/agent/extensions/ask-user-question.ts`.
 
+## Prompt snippets
+
+Mix-and-match single-purpose instruction snippets toggled onto a message before
+sending. Reset to all-off after each send and at session start. Sourced from
+amosblomqvist's [pi-config](https://github.com/amosblomqvist/pi-config) — files
+live in `pi/agent/extensions/prompt-snippets/snippets/`, one markdown file per
+snippet. Drop a new `.md` in there and it's in the menu on next `/reload`.
+
+### Keybind
+
+**`alt+s`** — opens the toggle menu. Same menu is reachable as `/snippets`.
+
+In the menu: `↑`/`↓` navigate, `space` toggles, `tab` previews the highlighted
+snippet, `enter` applies, `esc` cancels. Active snippets show as a widget above
+the editor (`↑ prepend: …` in accent, `↓ append: …` in warning). When you send,
+bodies are merged in `order`-sorted groups around your text and toggles reset.
+
+### Snippet file format
+
+```markdown
+---
+name: Concise
+description: Keep answers short
+placement: prepend
+order: 10
+---
+Keep your response concise. Skip preamble and unnecessary explanation.
+```
+
+| Field | Required | Default |
+| --- | --- | --- |
+| `name` | no | filename without `.md` |
+| `description` | no | shown in the menu |
+| `placement` | no | `append` (`prepend` or `append`) |
+| `order` | no | `9999` (lower sorts first within group) |
+
+Files are re-scanned every time the menu opens — edits take effect immediately,
+no `/reload` needed.
+
+### Shipped snippets
+
+| Snippet | Placement | Effect |
+| --- | --- | --- |
+| `ask-questions` | append | Clarify until shared understanding, then wait |
+| `verify-not-assume` | append | Verify before acting; ask if you can't |
+| `delegate-exploration` | append | Subagents read code, you verify critical parts |
+| `diagnose-report` | append | Investigate only; report findings + proposed fix |
+| `orchestrator-mode` | prepend | Outsource mechanical work; keep your context lean |
+| `session-kickoff` | prepend | Orient first, report back, then wait for alignment |
+
+## Observational memory
+
+[pi-observational-memory](https://github.com/amosblomqvist/pi-observational-memory)
+— tiered memory for long sessions. Parallel **observers** (subprocess `pi`
+workers) distill raw conversation chunks into atomic observations; a
+deterministic compaction block renders the buffer verbatim; a **consolidator**
+promotes the oldest observations into durable `.memory/<sessionId>/` topic
+files. Survives `/tree` and `/resume`.
+
+### On/off (default OFF)
+
+The extension ships gated off per session — completely invisible until you turn
+it on.
+
+- `/om` — toggle for this session
+- `/om on` / `/om off` — set explicitly
+
+State persists in the ledger and survives resume. When off, every trigger,
+hook, widget, and subprocess returns immediately.
+
+### Status & manual triggers
+
+- `/om:status` — workers in flight, pool size, topic-file count, journey size, **session cost**
+- `/om:compact` — force a compaction now (ignores threshold)
+- `/om:consolidate` — force a consolidation now (ignores threshold)
+
+### When to enable it
+
+Long single-topic sessions: multi-day debugging, a CTF challenge with 50 turns
+of recon, a security engagement across multiple hosts. Short, discrete
+questions — leave it off. Observers fire every `chunkTokens` (default 10k) of
+conversation, so the cost is real (visible in `/om:status`). The footer shows
+the running total right of the gauges.
+
+### Durable state
+
+`.memory/<sessionId>/` lives in the project, keyed by the immutable session id
+(set in the session header). Two sessions in the same project never share
+output. A fork seeds its dir from the parent on first touch. **Not** rolled
+back by `/tree` — memory persists across timeline jumps. Already in
+`.gitignore` — per-machine, not shared across clones.
+
+### Model config
+
+Worker subprocesses (observers + consolidator) are configured in
+`pi/agent/settings.json`:
+
+```jsonc
+"observational-memory": {
+  "models": {
+    "observer":     { "provider": "deepseek", "id": "deepseek-v4-flash", "thinking": "low" },
+    "consolidator": { "provider": "deepseek", "id": "deepseek-v4-flash", "thinking": "medium" }
+  }
+}
+```
+
+Other knobs (`chunkTokens`, `poolTargetTokens`, `compactAtContextTokens`,
+`tailTokens`, `journeyTargetTokens`, `observerConcurrency`, `passive`,
+`debugLog`) live in the same block — see the
+[upstream configuration reference](https://github.com/amosblomqvist/pi-observational-memory#configuration).
+
+`PI_OM_PASSIVE=1` forces `passive` (disables all triggers) for clean `/tree`
+testing. `passive` is a power-user setting distinct from the per-session
+on/off gate.
+
 ## toilet-pi remote control
 
 [toilet-pi](https://github.com/mrexodia/toilet-pi) lets you watch and control `pi`
