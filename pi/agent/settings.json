@@ -12,6 +12,13 @@
     "npm:pi-lens",
     "npm:pi-mcp-adapter",
     "https://github.com/mrexodia/toilet-pi",
-    "npm:pi-sub-agent"
-  ]
+    "npm:pi-sub-agent",
+    "https://github.com/amosblomqvist/pi-observational-memory"
+  ],
+  "observational-memory": {
+    "models": {
+      "observer": { "provider": "deepseek", "id": "deepseek-v4-flash", "thinking": "low" },
+      "consolidator": { "provider": "deepseek", "id": "deepseek-v4-flash", "thinking": "medium" }
+    }
+  }
 }

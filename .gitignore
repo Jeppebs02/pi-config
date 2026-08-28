@@ -33,3 +33,7 @@ pi/agent/mcp-cache.json
 
 # Maker subagents publish rendered lesson images into <cwd>/viz
 viz/
+
+# Observational memory: per-session durable state lives in each project's .memory/.
+# Per-session, per-machine — not shared across clones.
+.memory/
