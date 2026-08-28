@@ -8,10 +8,10 @@
   "packages": [
     "npm:pi-web-access",
     "npm:@dietrichgebert/ponytail",
-    "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-zentui",
     "npm:pi-lens",
     "npm:pi-mcp-adapter",
-    "https://github.com/mrexodia/toilet-pi"
+    "https://github.com/mrexodia/toilet-pi",
+    "npm:pi-sub-agent"
   ]
 }

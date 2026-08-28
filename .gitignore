@@ -30,3 +30,6 @@ pi/agent/toilet-pi-server.json
 Thumbs.db
 *.swp
 pi/agent/mcp-cache.json
+
+# Maker subagents publish rendered lesson images into <cwd>/viz
+viz/

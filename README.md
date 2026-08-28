@@ -16,6 +16,7 @@ pi-config/
 │       ├── skills/        # global skills (Agent Skills standard)
 │       ├── prompts/       # global prompt templates (/name to expand)
 │       ├── extensions/    # global TypeScript extensions
+│       ├── agents/        # subagent definitions (researcher, makers)
 │       └── themes/        # global themes
 ├── install.sh             # symlinks pi/ -> ~/.pi on Linux/macOS
 ├── install.ps1             # symlinks pi/ -> ~/.pi on Windows
@@ -226,6 +227,85 @@ pi config               # enable/disable resources from installed packages
 See [pi's package docs](https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/docs/packages.md)
 for the full reference (git/local sources, pinning versions/refs, package filtering, and
 how to build your own package).
+
+## Learning capability
+
+Ported from [amosblomqvist/learn](https://github.com/amosblomqvist/learn) — a teaching
+system built on pi: a skill that encodes a specific teaching philosophy, plus extensions
+for interactive quizzes, popup questions, and a markdown session log. Ask pi to teach
+you anything and it runs a **probe → plan → teach** loop instead of dumping facts.
+
+### What was added
+
+| Piece | Where | What it does |
+| --- | --- | --- |
+| `teach` skill | `pi/agent/skills/teach/` | Teaching philosophy: unconditional truths first, "how could I have discovered this?" motivation, quiz-check every node |
+| `visualize` skill | `pi/agent/skills/visualize/` | Delegates diagrams to the maker subagents when a picture beats prose |
+| `quiz` extension | `pi/agent/extensions/quiz.ts` | Graded multiple-choice popups (✓/✗, correct answer, explanation) |
+| `ask-user-question` ext | `pi/agent/extensions/ask-user-question.ts` | Popup questionnaires — **replaces** the `@juicesharp/rpiv-ask-user-question` package (see below) |
+| `md-log` extension | `pi/agent/extensions/md-log.ts` | Mirrors the session to a markdown file (Obsidian-friendly: LaTeX + mermaid render) |
+| `visual-tools` extension | `pi/agent/extensions/visual-tools/` | write/edit/render tools for Mermaid and SVG subagents |
+| `agents/` | `pi/agent/agents/` | `researcher` (web fact-checking), `mermaid-maker`, `svg-maker` |
+
+### Using it
+
+Nothing to enable — the skill is picked up automatically. Just ask:
+
+```
+teach me how the internet works
+explain why TCP handshakes exist
+walk me through how Merkle trees work
+```
+
+The `teach` skill runs its loop: **probe** your current level with `quiz` and your goal
+with `ask_user_question`, **plan** a dependency map (drawn as a mermaid graph), then
+**teach** node-by-node, quiz-checking each one so it actually locks in.
+
+Optional session log — mirror the conversation to a markdown file you can read rendered
+(Obsidian renders the LaTeX and mermaid in it):
+
+```
+/md-log <path-to-an-existing-note.md>   # link + backfill the current session
+/md-unlog                               # stop logging
+```
+
+### Subagents: pi-sub-agent (works on Windows)
+
+The `researcher` (fact-checking) and the two makers (diagrams) are **subagents** —
+spawned by the [pi-sub-agent](https://pi.dev/packages/pi-sub-agent) package (already in
+`settings.json`'s `packages`). It's multiplexer-free: each subagent is a child
+`pi --mode json -p --no-session` process, so no tmux needed — works on Windows as-is.
+It discovers the agents from `pi/agent/agents/` (same frontmatter format), and the
+makers' custom tools (`write_mermaid`, `render_svg`, …) are registered by the
+`visual-tools` extension, which child processes load automatically.
+
+### Visuals: both mermaid and SVG render on Windows, no system tools needed
+
+The npm deps are installed in `pi/agent/extensions/visual-tools/` (gitignored; re-run
+`npm install` there on a fresh clone), and the renderer auto-detects system Chrome
+(Windows + macOS paths, avoiding a puppeteer download).
+
+- **mermaid** renders via `@mermaid-js/mermaid-cli` + Chrome.
+- **SVG** renders via `rsvg-convert` (mac/Linux) → ImageMagick → **Chrome headless**
+  as a universal fallback (Chrome is already a requirement, and it's the only one of
+  the three that renders SVG text properly — ImageMagick's built-in MSVG delegate
+  doesn't). So the `svg-maker` works out of the box here; no extra installs.
+
+The maker renders, **looks at the PNG**, and publishes it to `<cwd>/viz/`; embed it
+in the lesson log with `![[viz-<slug>.png|500]]`.
+
+The agent definitions were repointed to this machine's models
+(`deepseek/deepseek-v4-flash`, `deepseek-v4-flash-vision-exp`) since the author's
+`openrouter/z-ai/glm-5.3` and `anthropic/claude-sonnet-5` aren't configured here.
+
+### Note: `ask_user_question` provider swap
+
+`settings.json` no longer lists `npm:@juicesharp/rpiv-ask-user-question`. The learn repo's
+bundled `ask-user-question.ts` registers the same `ask_user_question` tool
+(feature-equivalent: multiSelect, "Type something." row), and popups from different
+implementations don't serialize through the same UI lock — so only one should be loaded.
+To revert: add the package back to `settings.json`'s `packages` and delete
+`pi/agent/extensions/ask-user-question.ts`.
 
 ## toilet-pi remote control
 
