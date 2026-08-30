@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.84.3",
+  "lastChangelogVersion": "0.84.4",
   "theme": "gold-noir",
   "defaultProvider": "deepseek",
   "defaultModel": "deepseek-v4-flash",
@@ -17,8 +17,16 @@
   ],
   "observational-memory": {
     "models": {
-      "observer": { "provider": "deepseek", "id": "deepseek-v4-flash", "thinking": "low" },
-      "consolidator": { "provider": "deepseek", "id": "deepseek-v4-flash", "thinking": "medium" }
+      "observer": {
+        "provider": "deepseek",
+        "id": "deepseek-v4-flash",
+        "thinking": "low"
+      },
+      "consolidator": {
+        "provider": "deepseek",
+        "id": "deepseek-v4-flash",
+        "thinking": "medium"
+      }
     }
   }
 }
