@@ -433,6 +433,56 @@ running in the background. See [docs/toilet-pi.md](docs/toilet-pi.md) for setup,
 connecting a machine via `/toilet-pi setup <machine-url>`, and an important note about
 treating the machine connect URL and server token as secrets.
 
+## DaVinci Resolve MCP
+
+Exposes DaVinci Resolve's scripting API (440+ tools: project/timeline/media-pool
+management, color grading, Fusion compositing, rendering) via MCP, from
+[lordhoell/davinci-resolve-mcp](https://github.com/lordhoell/davinci-resolve-mcp). Two halves:
+
+- **Pi side** (committed, travels with the repo): `pi/agent/mcp.json`'s `davinci-resolve`
+  entry, and the skill at `pi/agent/skills/davinci-resolve-mcp/` (copied from the repo's
+  `skill/davinci-resolve-mcp/` — object registry pattern, workflow recipes, Fusion/render
+  references).
+- **Server side** (machine-local, NOT in the repo): the `davinci-resolve-mcp` Python
+  package, installed into a local Python's site-packages, and DaVinci Resolve (Studio)
+  itself.
+
+### Setting up a new machine
+
+1. **Find which Python `fusionscript.dll` actually links against.** Resolve's
+   `fusionscript.dll` (`C:\Program Files\Blackmagic Design\DaVinci Resolve\fusionscript.dll`)
+   is hard-linked to one specific Python minor version at install time (on this machine:
+   **3.13**, matching whichever Python was registered/installed when Resolve set itself
+   up) — it is *not* the generic "any Python >= 3.6" story the upstream docs imply.
+   Loading it from a mismatched interpreter (e.g. 3.11 or 3.12 installed alongside)
+   doesn't error cleanly — it **crashes the Python process with an access violation**
+   (`0xc0000005`) the instant the DLL is loaded, regardless of PATH order, the "External
+   scripting using" preference, or anything else. Confirm the right version by checking
+   Windows Event Viewer → Application log after a crash for "Faulting module path" — it
+   names the exact `pythonXXX.dll` Resolve's copy of fusionscript wants — then install
+   for *that* Python.
+2. **Install the server.** ⚠️ `pip install davinci-resolve-mcp` installs the *wrong*
+   package — that name on PyPI belongs to an unrelated `filmcademy` project and will
+   segfault on import regardless of Python version. Install lordhoell's version straight
+   from GitHub instead, using the Python version identified in step 1:
+
+   ```bash
+   "<path-to-that-python>\python.exe" -m pip install "mcp[cli]<2" "git+https://github.com/lordhoell/davinci-resolve-mcp.git"
+   ```
+
+   The `mcp<2` pin is also required — the repo's `mcp[cli]>=1.0` dependency is too loose
+   and pip will otherwise grab `mcp` 2.x, which renamed `FastMCP` and breaks the
+   server's imports.
+3. **Update `mcp.json`'s `command`** to the full path of the `davinci-resolve-mcp.exe`
+   that install produced (`<that-python>\Scripts\davinci-resolve-mcp.exe`) — a bare
+   command name is fragile across machines with multiple Pythons on PATH, and here it's
+   flat-out wrong for every Python except the one matching fusionscript.dll.
+4. DaVinci Resolve must already be running before the MCP server starts. (Also sanity
+   check Preferences → System → General → "External scripting using" is `Local` or
+   `Network`, though on this machine that wasn't the actual blocker — the Python
+   version mismatch was.)
+5. **Restart pi** and verify with `/mcp` or a proxy tool call.
+
 ## x64dbg / x32dbg MCP debugger access
 
 Exposes the x64dbg/x32dbg debuggers to pi via MCP so an agent can drive a debugging
