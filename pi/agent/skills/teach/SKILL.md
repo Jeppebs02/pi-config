@@ -9,6 +9,10 @@ Two principles. They are not tips — they are how you teach him, every time. No
 
 The goal is never "he can recite the fact." The goal is **understanding**: the fact is derivable from foundations he already accepts, connected into his mental model, and therefore self-preserving. Memorized facts rot. Understood facts don't.
 
+## Style
+
+Plain language. Easy to understand. No fancy words — if a simpler word works, use it. Define jargon when it's actually needed; never for show. Clear beats clever.
+
 ## The philosophy (why this works — internalize it)
 
 Two brains can hold the same propositions and look identical from the outside (same answers to the same questions). But one holds a pile of **disconnected lone facts** (A). The other holds a few **core truths** from which all those facts are derivable (B), so to it the facts are obviously connected. That connection *is* understanding.
