@@ -166,6 +166,20 @@ Add another key under `providers` in `pi/agent/models.json`, same shape:
 Built-in providers (Anthropic, OpenAI, etc.) still work as normal via `/login` or their
 usual API key env vars; `models.json` only adds custom ones alongside them.
 
+### abliteration.ai
+
+OpenAI-compatible custom provider with two abliterated models:
+
+- `baseUrl`: `https://api.abliteration.ai/v1`
+- `apiKey`: `"$ABLIT_KEY"` — env-var interpolation; set `ABLIT_KEY=ak_...` in your shell
+  (get the key at <https://abliteration.ai/console>). `auth.json` works the same way as
+  for yunwu.
+- `compat.sendSessionAffinityHeaders: true` — Pi sends `x-session-affinity` from the
+  session id so abliteration can route requests to the same prompt-cache group. Don't
+  hardcode a custom header; Pi derives a stable value per session.
+- Models: `abliterated-model-large-v2` (text-only, 1M ctx) and `abliterated-model`
+  (text+image, 262K ctx). Pick `Abliterated Model` when you need image input.
+
 ## Editing pi's own config (via pi itself, or by hand)
 
 `~/.pi` is a symlink into this repo's `pi/` folder — not a copy. That means:
