@@ -12,7 +12,7 @@ pi-config/
 │   └── agent/
 │       ├── AGENTS.md      # global context file, loaded every session
 │       ├── models.json    # custom providers — yunwu (openai-completions compat)
-│       ├── mcp.json       # MCP servers for the pi-mcp-adapter package (x64dbg/x32dbg)
+│       ├── mcp.json       # MCP servers for pi-mcp-adapter (x64dbg, Resolve, Packet Tracer)
 │       ├── skills/        # global skills (Agent Skills standard)
 │       ├── prompts/       # global prompt templates (/name to expand)
 │       ├── extensions/    # global TypeScript extensions
@@ -496,6 +496,24 @@ management, color grading, Fusion compositing, rendering) via MCP, from
    `Network`, though on this machine that wasn't the actual blocker — the Python
    version mismatch was.)
 5. **Restart pi** and verify with `/mcp` or a proxy tool call.
+
+## Cisco Packet Tracer MCP
+
+Drives a running Cisco Packet Tracer (plan/validate/live-deploy topologies, ACL/NAT, raw
+Script-Engine JS) via [Mats2208/MCP-Packet-Tracer](https://github.com/Mats2208/MCP-Packet-Tracer).
+Two halves:
+
+- **Pi side** (committed): `pi/agent/mcp.json`'s `packet-tracer` entry
+  (`python -m packet_tracer_mcp --stdio`) and the skill at `pi/agent/skills/packet-tracer/`.
+- **Machine side** (NOT in the repo): the `packet_tracer_mcp` Python package and the
+  MCP Control Center extension loaded inside Packet Tracer (HTTP bridge on `:54321`).
+
+### Setting up a new machine
+
+1. Install the server per the upstream README so `python -c "import packet_tracer_mcp"`
+   works for whichever `python` is first on PATH (or change `command` to a full path).
+2. Load the bridge extension in Packet Tracer as described upstream.
+3. **Restart pi** and verify with `/mcp` or `mcp({ search: "pt_" })`.
 
 ## x64dbg / x32dbg MCP debugger access
 
