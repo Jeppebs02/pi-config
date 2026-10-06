@@ -3,6 +3,10 @@
     "davinci-resolve": {
       "command": "C:\\Users\\jeppe\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\davinci-resolve-mcp.exe"
     },
+    "packet-tracer": {
+      "command": "python",
+      "args": ["-m", "packet_tracer_mcp", "--stdio"]
+    },
     "x64dbg": {
       "type": "http",
       "url": "http://localhost:9094/",
