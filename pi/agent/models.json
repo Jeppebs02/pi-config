@@ -25,8 +25,8 @@
       "apiKey": "ORCA_KEY",
       "models": [
         {
-          "id": "obsidian/Qwen3.8-27B",
-          "name": "Qwen3.8 27B (OrcaRouter)",
+          "id": "orca/orcacyber-zero-1.5",
+          "name": "Orca Cyber zero 1.5",
           "reasoning": true,
           "input": ["text", "image"],
           "contextWindow": 262000,
