@@ -7,6 +7,10 @@
       "command": "python",
       "args": ["-m", "packet_tracer_mcp", "--stdio"]
     },
+    "roblox-studio": {
+      "command": "cmd.exe",
+      "args": ["/c", "%LOCALAPPDATA%\\Roblox\\mcp.bat"]
+    },
     "x64dbg": {
       "type": "http",
       "url": "http://localhost:9094/",

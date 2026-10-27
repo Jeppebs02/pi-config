@@ -12,7 +12,7 @@ pi-config/
 │   └── agent/
 │       ├── AGENTS.md      # global context file, loaded every session
 │       ├── models.json    # custom providers — yunwu (openai-completions compat)
-│       ├── mcp.json       # MCP servers for pi-mcp-adapter (x64dbg, Resolve, Packet Tracer)
+│       ├── mcp.json       # MCP servers for pi-mcp-adapter (x64dbg, Resolve, Packet Tracer, Roblox Studio)
 │       ├── skills/        # global skills (Agent Skills standard)
 │       ├── prompts/       # global prompt templates (/name to expand)
 │       ├── extensions/    # global TypeScript extensions
@@ -514,6 +514,23 @@ Two halves:
    works for whichever `python` is first on PATH (or change `command` to a full path).
 2. Load the bridge extension in Packet Tracer as described upstream.
 3. **Restart pi** and verify with `/mcp` or `mcp({ search: "pt_" })`.
+
+## Roblox Studio MCP
+
+Drives the open Roblox Studio session (script read/edit, Luau execution, game tree
+exploration, playtest + input simulation, AI mesh/material generation) via the
+built-in Studio MCP server over stdio.
+
+- **Pi side** (committed): `pi/agent/mcp.json`'s `roblox-studio` entry
+  (`cmd.exe /c %LOCALAPPDATA%\Roblox\mcp.bat`).
+- **Machine side** (NOT in the repo): Roblox Studio with the server enabled —
+  Assistant → `…` → **Manage MCP Servers** → *Enable Studio as MCP server*
+  (writes the `mcp.bat` shim to `%LOCALAPPDATA%\Roblox\`).
+
+### Setting up a new machine
+
+1. Install the latest Roblox Studio and enable the server as above.
+2. **Restart pi** and verify with `/mcp` or `mcp({ search: "studio" })`.
 
 ## x64dbg / x32dbg MCP debugger access
 
