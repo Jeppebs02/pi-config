@@ -7,6 +7,10 @@
       "command": "python",
       "args": ["-m", "packet_tracer_mcp", "--stdio"]
     },
+    "rawmakase": {
+      "command": "C:\\Users\\lain\\AppData\\Local\\Programs\\RAWmakase\\rawmakase.exe",
+      "args": ["mcp"]
+    },
     "roblox-studio": {
       "command": "cmd.exe",
       "args": ["/c", "%LOCALAPPDATA%\\Roblox\\mcp.bat"]
