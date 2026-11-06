@@ -107,6 +107,17 @@ if ($IsAdmin) {
     Write-Warning "  Add-MpPreference -ExclusionPath `"$RepoDir`""
 }
 
+# LightCraft control port. The lightcraft MCP in pi/agent/mcp.json connects to
+# 127.0.0.1:7980, so the LightCraft app must listen there.
+$LightCraftPort = "7980"
+if ([Environment]::GetEnvironmentVariable("LIGHTCRAFT_CONTROL_PORT", "User") -eq $LightCraftPort) {
+    Write-Host "LIGHTCRAFT_CONTROL_PORT already set to $LightCraftPort."
+} else {
+    setx LIGHTCRAFT_CONTROL_PORT $LightCraftPort | Out-Null
+    $env:LIGHTCRAFT_CONTROL_PORT = $LightCraftPort
+    Write-Host "Set user environment variable LIGHTCRAFT_CONTROL_PORT=$LightCraftPort (restart LightCraft to pick it up)."
+}
+
 $authPath = Join-Path $Src "agent\auth.json"
 if (-not (Test-Path $authPath)) {
     Write-Host ""

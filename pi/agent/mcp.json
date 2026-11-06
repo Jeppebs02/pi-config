@@ -3,6 +3,10 @@
     "davinci-resolve": {
       "command": "C:\\Users\\jeppe\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\davinci-resolve-mcp.exe"
     },
+    "lightcraft": {
+      "command": "C:\\Users\\lain\\AppData\\Local\\Programs\\ArtCraft\\LightCraft\\lightcraft-cli.exe",
+      "args": ["mcp", "--connect", "127.0.0.1:7980"]
+    },
     "packet-tracer": {
       "command": "python",
       "args": ["-m", "packet_tracer_mcp", "--stdio"]
