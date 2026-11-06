@@ -1,9 +1,19 @@
 {
+  "$schema": "https://pi.dev/schemas/settings.schema.json",
   "lastChangelogVersion": "1.4.0",
   "theme": "gold-noir",
-  "defaultProvider": "deepseek",
-  "defaultModel": "deepseek-v4-flash",
+  "defaultProvider": "zai",
+  "defaultModel": "glm-5.3-flash",
   "defaultThinkingLevel": "high",
+  "modelThinkingLevels": {
+    "zai/glm-5.3": "max",
+    "zai/glm-5.3-flash": "high"
+  },
+  "enabledModels": [
+    "zai/glm-5.3-flash",
+    "zai/glm-5.3",
+    "deepseek/deepseek-v4-flash"
+  ],
   "defaultProjectTrust": "ask",
   "packages": [
     "npm:pi-web-access",
@@ -18,13 +28,13 @@
   "observational-memory": {
     "models": {
       "observer": {
-        "provider": "deepseek",
-        "id": "deepseek-v4-flash",
+        "provider": "zai",
+        "id": "glm-5.3-flash",
         "thinking": "low"
       },
       "consolidator": {
-        "provider": "deepseek",
-        "id": "deepseek-v4-flash",
+        "provider": "zai",
+        "id": "glm-5.3-flash",
         "thinking": "medium"
       }
     }
