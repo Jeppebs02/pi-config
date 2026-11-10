@@ -7,7 +7,7 @@
   "defaultThinkingLevel": "high",
   "modelThinkingLevels": {
     "zai/glm-5.3": "max",
-    "zai/glm-5.3-flash": "high"
+    "zai/glm-5.3-flash": "max"
   },
   "enabledModels": [
     "zai/glm-5.3-flash",
