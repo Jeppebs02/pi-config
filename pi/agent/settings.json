@@ -1,6 +1,6 @@
 {
   "$schema": "https://pi.dev/schemas/settings.schema.json",
-  "lastChangelogVersion": "1.4.0",
+  "lastChangelogVersion": "1.5.1",
   "theme": "gold-noir",
   "defaultProvider": "zai",
   "defaultModel": "glm-5.3-flash",
@@ -41,5 +41,11 @@
   },
   "extensions": [
     "-builtin:mcp"
-  ]
+  ],
+  "extensionChangelogVersions": {
+    "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.47.0",
+    "{\"source\":\"npm:pi-lens\",\"scope\":\"user\"}": "4.4.11",
+    "{\"source\":\"npm:pi-mcp-adapter\",\"scope\":\"user\"}": "7.0.1",
+    "{\"source\":\"npm:pi-sub-agent\",\"scope\":\"user\"}": "0.1.5"
+  }
 }
