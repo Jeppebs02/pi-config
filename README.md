@@ -12,7 +12,9 @@ pi-config/
 │   └── agent/
 │       ├── AGENTS.md      # global context file, loaded every session
 │       ├── models.json    # custom providers — yunwu (openai-completions compat)
-│       ├── mcp.json       # MCP servers for pi-mcp-adapter (x64dbg, Resolve, Packet Tracer, Roblox Studio)
+│       ├── mcp.json       # symlink → mcp.linux.json / mcp.windows.json (per-OS MCP servers; install scripts create it)
+│       ├── mcp.linux.json # tracked Linux MCP servers (none yet — add here when a Linux MCP is installed)
+│       ├── mcp.windows.json # tracked Windows MCP servers (x64dbg, Resolve, LightCraft, RAWmakase, Roblox Studio, Packet Tracer)
 │       ├── skills/        # global skills (Agent Skills standard)
 │       ├── prompts/       # global prompt templates (/name to expand)
 │       ├── extensions/    # global TypeScript extensions
@@ -453,7 +455,7 @@ Exposes DaVinci Resolve's scripting API (440+ tools: project/timeline/media-pool
 management, color grading, Fusion compositing, rendering) via MCP, from
 [lordhoell/davinci-resolve-mcp](https://github.com/lordhoell/davinci-resolve-mcp). Two halves:
 
-- **Pi side** (committed, travels with the repo): `pi/agent/mcp.json`'s `davinci-resolve`
+- **Pi side** (committed, travels with the repo): `pi/agent/mcp.windows.json`'s `davinci-resolve`
   entry, and the skill at `pi/agent/skills/davinci-resolve-mcp/` (copied from the repo's
   `skill/davinci-resolve-mcp/` — object registry pattern, workflow recipes, Fusion/render
   references).

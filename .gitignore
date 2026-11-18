@@ -1,6 +1,10 @@
 # Local-only credentials — never commit
 pi/agent/auth.json
 
+# Runtime MCP config: a symlink (created by install.sh / install.ps1) pointing
+# at the tracked per-OS variant, mcp.linux.json or mcp.windows.json
+pi/agent/mcp.json
+
 # Session data, if pi ever writes into this repo instead of the real ~/.pi
 pi/agent/sessions/
 pi/agent/trust.json

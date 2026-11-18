@@ -55,6 +55,19 @@ if [ "$SKIP_SYMLINK" -eq 0 ]; then
   echo "Linked $DEST -> $SRC"
 fi
 
+# MCP servers differ per OS: pi reads a single agent/mcp.json, so point it at
+# this OS's tracked variant (mcp.linux.json / mcp.windows.json).
+MCP_JSON="$SRC/agent/mcp.json"
+if [ -L "$MCP_JSON" ]; then
+  ln -sfn mcp.linux.json "$MCP_JSON"
+  echo "Linked $MCP_JSON -> mcp.linux.json"
+elif [ -e "$MCP_JSON" ]; then
+  echo "Note: $MCP_JSON exists and is not a symlink — leaving it alone." >&2
+else
+  ln -s mcp.linux.json "$MCP_JSON"
+  echo "Linked $MCP_JSON -> mcp.linux.json"
+fi
+
 if [ ! -f "$SRC/agent/auth.json" ]; then
   echo
   echo "Note: $SRC/agent/auth.json does not exist yet (it's gitignored)."

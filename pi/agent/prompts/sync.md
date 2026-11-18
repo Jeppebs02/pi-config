@@ -1,5 +1,6 @@
-Run `git -C "C:\Users\jeppe\Documents\GitHub\pi-config" status --porcelain` and
-`git -C "C:\Users\jeppe\Documents\GitHub\pi-config" diff` via the bash tool.
+The repo lives at the target of the ~/.pi symlink (its parent directory). Resolve
+it first, e.g. `dir=$(dirname "$(readlink "$HOME/.pi")")`, then run
+`git -C "$dir" status --porcelain` and `git -C "$dir" diff` via the bash tool.
 
 Show me a concise summary of what changed (new/removed skills, prompts, extensions,
 themes, or edits to AGENTS.md / models.json / settings.json). Ignore anything under

@@ -84,6 +84,21 @@ if (-not $SkipSymlink) {
     }
 }
 
+# MCP servers differ per OS: pi reads a single agent\mcp.json, so point it at
+# this OS's tracked variant (mcp.linux.json / mcp.windows.json).
+$McpJson = Join-Path $Src "agent\mcp.json"
+if ((Test-Path $McpJson) -and ((Get-Item $McpJson -Force).LinkType -ne "SymbolicLink")) {
+    Write-Warning "$McpJson exists and is not a symlink - leaving it alone."
+} else {
+    try {
+        if (Test-Path $McpJson) { Remove-Item $McpJson -Force }
+        New-Item -ItemType SymbolicLink -Path $McpJson -Target "mcp.windows.json" | Out-Null
+        Write-Host "Linked $McpJson -> mcp.windows.json"
+    } catch {
+        Write-Warning "Could not link mcp.json (no Windows servers will load):`n$_"
+    }
+}
+
 # Exclude the repo from Windows Defender. The hack-skills / ctf-skills docs
 # contain reverse-shell and web-shell payload examples that real-time
 # protection flags as malware (Backdoor:*) and deletes on sight.
