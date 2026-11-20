@@ -1,6 +1,6 @@
 {
   "$schema": "https://pi.dev/schemas/settings.schema.json",
-  "lastChangelogVersion": "1.5.2",
+  "lastChangelogVersion": "1.6.0",
   "theme": "gold-noir",
   "defaultProvider": "zai",
   "defaultModel": "glm-5.3-flash",
@@ -12,7 +12,7 @@
   "enabledModels": [
     "zai/glm-5.3-flash",
     "zai/glm-5.3",
-    "deepseek/deepseek-v4-flash"
+    "deepseek/deepseek-flash"
   ],
   "defaultProjectTrust": "ask",
   "packages": [
