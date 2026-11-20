@@ -1,5 +1,13 @@
 # toilet-pi
 
+> **Removed from `pi` on 2026-11-20** — the package reference is gone from
+> `settings.json`; this doc is kept for the teardown below and as reference for a
+> future replacement. **Pending on the homelab:** stop the server's docker
+> container and remove its Cloudflare DNS record (blocked on the Home WireGuard
+> tunnel being fixed). To bring it back: `pi install
+> https://github.com/mrexodia/toilet-pi` and re-register the supervisor service
+> (see below).
+
 [toilet-pi](https://github.com/mrexodia/toilet-pi) lets you control `pi` sessions on this
 machine from a browser: watch active work, send prompts, abort a run, resume an inactive
 session in the background, or start a new session in a project — from a phone or another

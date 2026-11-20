@@ -80,6 +80,10 @@ npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 
 ## Providers
 
+**Default model/provider** is set in `pi/agent/settings.json` (`defaultProvider: zai` —
+Z.ai GLM, currently `glm-5.3-flash` with thinking `high`). The entries below are
+**custom extras** registered in `models.json` for when you explicitly switch providers.
+
 `pi/agent/models.json` registers **yunwu** as a custom OpenAI-compatible provider:
 
 - `api`: `openai-completions`
@@ -285,15 +289,15 @@ Optional session log — mirror the conversation to a markdown file you can read
 /md-unlog                               # stop logging
 ```
 
-### Subagents: pi-sub-agent (works on Windows)
+### Subagents: built-in (pi ≥ 1.5.2)
 
-The `researcher` (fact-checking) and the two makers (diagrams) are **subagents** —
-spawned by the [pi-sub-agent](https://pi.dev/packages/pi-sub-agent) package (already in
-`settings.json`'s `packages`). It's multiplexer-free: each subagent is a child
-`pi --mode json -p --no-session` process, so no tmux needed — works on Windows as-is.
-It discovers the agents from `pi/agent/agents/` (same frontmatter format), and the
-makers' custom tools (`write_mermaid`, `render_svg`, …) are registered by the
-`visual-tools` extension, which child processes load automatically.
+The `researcher` (fact-checking) and the two makers (diagrams) are **subagents** — spawned
+by pi's **built-in `subagent` tool**, which discovers them from `pi/agent/agents/` (same
+frontmatter format). The older [pi-sub-agent](https://pi.dev/packages/pi-sub-agent)
+package was removed from `settings.json` on 2026-11-20 once the builtin covered it; to
+revert: `pi install npm:pi-sub-agent`. The makers' custom tools (`write_mermaid`,
+`render_svg`, …) are registered by the `visual-tools` extension, which child sessions
+load automatically.
 
 ### Visuals: both mermaid and SVG render on Windows, no system tools needed
 
@@ -440,12 +444,20 @@ on/off gate.
 
 ## toilet-pi remote control
 
+**Removed from `pi` on 2026-11-20** — the package reference is gone from
+`settings.json` (to be replaced by a more robust remote-control solution, TBD). The
+**server is still running on the homelab**: its docker container and Cloudflare DNS
+record still need to be taken down (pending — needs the Home WireGuard tunnel working).
+To revert: `pi install https://github.com/mrexodia/toilet-pi` and re-register the
+supervisor service.
+
 [toilet-pi](https://github.com/mrexodia/toilet-pi) lets you watch and control `pi`
 sessions on this machine from a browser. It's vendored as a `pi` package (see
 [Installing packages](#installing-packages) above) — committed in `settings.json`,
 cloned by `pi` itself — and `install.ps1`/`install.sh` additionally register its
 supervisor process as a Windows Scheduled Task / systemd `--user` service so it keeps
-running in the background. See [docs/toilet-pi.md](docs/toilet-pi.md) for setup,
+running in the background. See [docs/toilet-pi.md](docs/toilet-pi.md) (kept for
+reference and teardown) for setup,
 connecting a machine via `/toilet-pi setup <machine-url>`, and an important note about
 treating the machine connect URL and server token as secrets.
 

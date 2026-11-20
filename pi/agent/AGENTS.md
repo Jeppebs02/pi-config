@@ -18,5 +18,8 @@ professional work — don't add unnecessary disclaimers.
 
 ## Environment
 
-- Default model/provider lives in models.json (the yunwu provider).
+- Default model/provider is set in settings.json: `defaultProvider: zai` (Z.ai
+  GLM — currently glm-5.3-flash, thinking high). Custom providers live in
+  models.json (yunwu, orcarouter, abliteration) and carry inline API keys
+  there — never print models.json wholesale or commit it.
 - Secrets live in auth.json and env vars — never print, commit, or inline them.

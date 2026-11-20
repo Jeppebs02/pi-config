@@ -21,8 +21,6 @@
     "npm:pi-zentui",
     "npm:pi-lens",
     "npm:pi-mcp-adapter",
-    "https://github.com/mrexodia/toilet-pi",
-    "npm:pi-sub-agent",
     "https://github.com/amosblomqvist/pi-observational-memory"
   ],
   "observational-memory": {
@@ -45,7 +43,6 @@
   "extensionChangelogVersions": {
     "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.48.0",
     "{\"source\":\"npm:pi-lens\",\"scope\":\"user\"}": "4.5.1",
-    "{\"source\":\"npm:pi-mcp-adapter\",\"scope\":\"user\"}": "7.0.1",
-    "{\"source\":\"npm:pi-sub-agent\",\"scope\":\"user\"}": "0.1.5"
+    "{\"source\":\"npm:pi-mcp-adapter\",\"scope\":\"user\"}": "7.0.1"
   }
 }
