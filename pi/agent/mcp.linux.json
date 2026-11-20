@@ -1,3 +1,36 @@
 {
-  "mcpServers": {}
+  "mcpServers": {
+    "lightcraft": {
+      "command": "/usr/bin/lightcraft-cli",
+      "args": ["mcp", "/home/lain/Pictures/LightCraft"]
+    },
+    "photocraft": {
+      "command": "/usr/bin/photocraft-cli",
+      "args": ["mcp", "--automation-read-root", "/home/lain/Pictures", "--automation-write-root", "/home/lain/Pictures"]
+    },
+    "cadcraft": {
+      "command": "/usr/bin/cadcraft-cli",
+      "args": ["mcp"]
+    },
+    "craft-anything": {
+      "command": "/usr/bin/craft-anything-cli",
+      "args": ["mcp"]
+    },
+    "deckcraft": {
+      "command": "/usr/bin/deckcraft-cli",
+      "args": ["mcp"]
+    },
+    "filmcraft": {
+      "command": "/usr/bin/filmcraft-cli",
+      "args": ["mcp"]
+    },
+    "gridcraft": {
+      "command": "/usr/bin/gridcraft-cli",
+      "args": ["mcp"]
+    },
+    "soundcraft": {
+      "command": "/usr/bin/soundcraft-cli",
+      "args": ["mcp"]
+    }
+  }
 }

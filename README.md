@@ -13,7 +13,7 @@ pi-config/
 │       ├── AGENTS.md      # global context file, loaded every session
 │       ├── models.json    # custom providers — yunwu (openai-completions compat)
 │       ├── mcp.json       # symlink → mcp.linux.json / mcp.windows.json (per-OS MCP servers; install scripts create it)
-│       ├── mcp.linux.json # tracked Linux MCP servers (none yet — add here when a Linux MCP is installed)
+│       ├── mcp.linux.json # tracked Linux MCP servers — the 8 installed Craft apps (ArtCraft) + future Linux MCPs
 │       ├── mcp.windows.json # tracked Windows MCP servers (x64dbg, Resolve, LightCraft, RAWmakase, Roblox Studio, Packet Tracer)
 │       ├── skills/        # global skills (Agent Skills standard)
 │       ├── prompts/       # global prompt templates (/name to expand)
