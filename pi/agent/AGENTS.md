@@ -15,11 +15,12 @@ professional work — don't add unnecessary disclaimers.
 - Run the project's existing test/lint commands before declaring a task done.
 - Ask before anything destructive (force-push, rm -rf, dropping data, rewriting history).
 - For small ambiguities, make a reasonable assumption and state it rather than stalling.
+- Don't git commit unless asked.
 
 ## Environment
 
-- Default model/provider is set in settings.json: `defaultProvider: zai` (Z.ai
-  GLM — currently glm-5.3-flash, thinking high). Custom providers live in
-  models.json (yunwu, orcarouter, abliteration) and carry inline API keys
-  there — never print models.json wholesale or commit it.
-- Secrets live in auth.json and env vars — never print, commit, or inline them.
+- I use this file on two machines: Arch/Omarchy (Linux) and Windows. Check
+  the platform before assuming bash, paths, or tooling. On the Omarchy
+  machine, read ~/.config/AGENTS.md before touching anything in ~/.config/.
+- settings.json sets the default provider; models.json and auth.json carry
+  inline API keys/secrets — never print, commit, or inline them.
