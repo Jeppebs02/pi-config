@@ -3,7 +3,7 @@
   "lastChangelogVersion": "1.6.0",
   "theme": "gold-noir",
   "defaultProvider": "zai",
-  "defaultModel": "glm-5.3-flash",
+  "defaultModel": "glm-5.3",
   "defaultThinkingLevel": "high",
   "modelThinkingLevels": {
     "zai/glm-5.3": "max",
@@ -21,7 +21,8 @@
     "npm:pi-zentui",
     "npm:pi-lens",
     "npm:pi-mcp-adapter",
-    "https://github.com/amosblomqvist/pi-observational-memory"
+    "https://github.com/amosblomqvist/pi-observational-memory",
+    "npm:pi-subagents"
   ],
   "observational-memory": {
     "models": {

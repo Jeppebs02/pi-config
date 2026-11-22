@@ -4,7 +4,7 @@ description: Authors ONE Mermaid diagram from a brief, renders it to a PNG, LOOK
 tools: write_mermaid, edit_mermaid, render_mermaid, read
 model: deepseek/deepseek-flash
 thinking: medium
-system-prompt: append
+systemPromptMode: append
 auto-exit: true
 ---
 

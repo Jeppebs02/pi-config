@@ -18,6 +18,24 @@
         }
       ]
     },
+    "deepinfra": {
+      "name": "DeepInfra",
+      "baseUrl": "https://api.deepinfra.com/v1/openai",
+      "api": "openai-completions",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "authHeader": true,
+      "models": [
+        {
+          "id": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "name": "DeepSeek V4.1 Flash 1017 (DeepInfra)",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 1048576,
+          "maxTokens": 393216,
+          "cost": { "input": 0.14, "output": 0.42, "cacheRead": 0.004, "cacheWrite": 0 }
+        }
+      ]
+    },
     "orcarouter": {
       "name": "OrcaRouter",
       "baseUrl": "https://api.orcarouter.ai/v1",

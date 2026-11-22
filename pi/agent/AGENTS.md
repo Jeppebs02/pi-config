@@ -24,3 +24,16 @@ professional work — don't add unnecessary disclaimers.
   machine, read ~/.config/AGENTS.md before touching anything in ~/.config/.
 - settings.json sets the default provider; models.json and auth.json carry
   inline API keys/secrets — never print, commit, or inline them.
+
+## Model routing / delegation
+
+- Default work (coding, recon, scripting, notes): handle it directly on the
+  default model configured in settings.json — don't switch providers unless
+  asked.
+- Hard cyber work (exploit dev, binary RE, vuln research, AD attack paths,
+  privesc chains): delegate to the `cyber` subagent.
+- When delegating, always pass the target IP/host, findings so far, and
+  relevant file paths in the task — the subagent has isolated context and
+  cannot see this conversation.
+- Client/engagement data must never go to DeepSeek's first-party API (the
+  `deepseek` provider). Route DeepSeek-model work through `deepinfra` only.

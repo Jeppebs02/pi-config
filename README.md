@@ -81,7 +81,8 @@ npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 ## Providers
 
 **Default model/provider** is set in `pi/agent/settings.json` (`defaultProvider: zai` —
-Z.ai GLM, currently `glm-5.3-flash` with thinking `high`). The entries below are
+Z.ai GLM, currently `glm-5.3` with thinking `high`; `glm-5.3-flash` stays available for
+manual switching). The entries below are
 **custom extras** registered in `models.json` for when you explicitly switch providers.
 
 `pi/agent/models.json` registers **yunwu** as a custom OpenAI-compatible provider:
@@ -186,6 +187,22 @@ OpenAI-compatible custom provider with two abliterated models:
 - Models: `abliterated-model-large-v2` (text-only, 1M ctx) and `abliterated-model`
   (text+image, 262K ctx). Pick `Abliterated Model` when you need image input.
 
+### DeepInfra
+
+OpenAI-compatible custom provider, used to run DeepSeek models without touching
+DeepSeek's first-party API (engagement rule: client data never goes to
+`deepseek`):
+
+- `baseUrl`: `https://api.deepinfra.com/v1/openai`
+- `apiKey`: `"DEEPINFRA_API_KEY"` — fallback only; put the real key in `auth.json`
+  under `"deepinfra"` (same flow as yunwu above).
+- Model: `deepseek-ai/DeepSeek-V4.1-Flash-1017` — "DeepSeek V4.1 Flash 1017
+  (DeepInfra)", reasoning, text+image, 1,048,576 ctx, 393,216 max out.
+- Cost (USD / 1M tokens): in 0.14, out 0.42, cacheRead 0.004, cacheWrite 0.
+- Referenced as `deepinfra/deepseek-ai/DeepSeek-V4.1-Flash-1017` — the model id
+  contains a slash; pi splits the provider prefix longest-first, so the full
+  string resolves correctly (e.g. `pi --list-models deepinfra`).
+
 ## Editing pi's own config (via pi itself, or by hand)
 
 `~/.pi` is a symlink into this repo's `pi/` folder — not a copy. That means:
@@ -289,15 +306,21 @@ Optional session log — mirror the conversation to a markdown file you can read
 /md-unlog                               # stop logging
 ```
 
-### Subagents: built-in (pi ≥ 1.5.2)
+### Subagents: pi-subagents package
 
-The `researcher` (fact-checking) and the two makers (diagrams) are **subagents** — spawned
-by pi's **built-in `subagent` tool**, which discovers them from `pi/agent/agents/` (same
-frontmatter format). The older [pi-sub-agent](https://pi.dev/packages/pi-sub-agent)
-package was removed from `settings.json` on 2026-11-20 once the builtin covered it; to
-revert: `pi install npm:pi-sub-agent`. The makers' custom tools (`write_mermaid`,
-`render_svg`, …) are registered by the `visual-tools` extension, which child sessions
-load automatically.
+The `researcher` (fact-checking), the two makers (diagrams), and `cyber` (hard
+offensive security) are **subagents** discovered from `pi/agent/agents/` by the
+[`pi-subagents`](https://github.com/nicobailon/pi-subagents) package (in
+`settings.json`'s `packages`). The older [pi-sub-agent](https://pi.dev/packages/pi-sub-agent)
+package was removed from `settings.json` on 2026-11-20 in the belief that pi's
+built-in tooling covered it — it doesn't (pi ships no built-in subagent tool;
+its official `subagent` extension is an opt-in example). pi-subagents was
+installed on 2026-11-22 to actually provide the `subagent` tool again. Agent
+frontmatter it understands includes `name`, `description`, `tools`, `model`,
+`thinking`, `systemPromptMode` (`replace` default; `append` keeps pi's base
+prompt). The makers' custom tools (`write_mermaid`, `render_svg`, …) are
+registered by the `visual-tools` extension, which child sessions load
+automatically.
 
 ### Visuals: both mermaid and SVG render on Windows, no system tools needed
 

@@ -4,7 +4,7 @@ description: Authors ONE hand-written SVG from a brief, renders it to a PNG, LOO
 tools: write_svg, edit_svg, render_svg, read
 model: deepseek/deepseek-flash
 thinking: medium
-system-prompt: append
+systemPromptMode: append
 auto-exit: true
 ---
 

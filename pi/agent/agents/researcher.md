@@ -4,7 +4,7 @@ description: Web researcher — searches the web and synthesizes findings
 tools: web_search, fetch_content
 model: deepseek/deepseek-flash
 thinking: medium
-system-prompt: append
+systemPromptMode: append
 auto-exit: true
 ---
 
