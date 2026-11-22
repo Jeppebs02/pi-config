@@ -19,6 +19,7 @@ professional work — don't add unnecessary disclaimers.
 
 ## Environment
 
+- Homelab context: fetch http://network.info/llms.txt (network map, machines, SSH creds) when homelab/infra context is needed. Repo: Documents/GitHub/NetworkInfo (private; deploy = PR to master).
 - I use this file on two machines: Arch/Omarchy (Linux) and Windows. Check
   the platform before assuming bash, paths, or tooling. On the Omarchy
   machine, read ~/.config/AGENTS.md before touching anything in ~/.config/.
