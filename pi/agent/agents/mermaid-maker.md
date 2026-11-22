@@ -2,7 +2,7 @@
 name: mermaid-maker
 description: Authors ONE Mermaid diagram from a brief, renders it to a PNG, LOOKS at the result, iterates until it is correct and clean, publishes the PNG into the Obsidian vault, and returns the filename. For structural/relational visuals — dependency graphs, flows, sequences, state machines, trees, ER, timelines.
 tools: write_mermaid, edit_mermaid, render_mermaid, read
-model: deepseek/deepseek-flash
+model: deepinfra/deepseek-ai/DeepSeek-V4.1-Flash-1017
 thinking: medium
 systemPromptMode: append
 auto-exit: true

@@ -338,7 +338,8 @@ The maker renders, **looks at the PNG**, and publishes it to `<cwd>/viz/`; embed
 in the lesson log with `![[viz-<slug>.png|500]]`.
 
 The agent definitions were repointed to this machine's models
-(`deepseek/deepseek-flash`, the current DeepSeek V4.1 Flash) since the author's
+(`deepinfra/deepseek-ai/DeepSeek-V4.1-Flash-1017`, DeepSeek V4.1 Flash via
+DeepInfra — never DeepSeek's first-party API) since the author's
 `openrouter/z-ai/glm-5.3` and `anthropic/claude-sonnet-5` aren't configured here.
 
 ### Note: `ask_user_question` provider swap
@@ -450,8 +451,8 @@ Worker subprocesses (observers + consolidator) are configured in
 ```jsonc
 "observational-memory": {
   "models": {
-    "observer":     { "provider": "deepseek", "id": "deepseek-flash", "thinking": "low" },
-    "consolidator": { "provider": "deepseek", "id": "deepseek-flash", "thinking": "medium" }
+    "observer":     { "provider": "zai", "id": "glm-5.3-flash", "thinking": "low" },
+    "consolidator": { "provider": "zai", "id": "glm-5.3-flash", "thinking": "medium" }
   }
 }
 ```

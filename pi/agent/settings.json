@@ -12,7 +12,7 @@
   "enabledModels": [
     "zai/glm-5.3-flash",
     "zai/glm-5.3",
-    "deepseek/deepseek-flash"
+    "deepinfra/deepseek-ai/DeepSeek-V4.1-Flash-1017"
   ],
   "defaultProjectTrust": "ask",
   "packages": [
