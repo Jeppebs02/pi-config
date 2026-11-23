@@ -49,14 +49,19 @@ or the server answers `host_not_allowed`.
    credentials-file line is omitted — cloudflared auto-discovers
    `~/.cloudflared/<tunnel-id>.json`)
 3. DNS CNAME `pi-desktop.jeppebs.xyz` → `66987e68-….cfargotunnel.com` (proxied)
-4. Scheduled tasks (logon, no admin needed, PowerShell `Register-ScheduledTask`):
-   `cloudflared-pi-desktop` and `pi-dashboard` (server auto-started at logon
-   so the chooser light stays green without a running pi session)
+4. Scheduled tasks `cloudflared-pi-desktop` and `pi-dashboard` (server
+   auto-started at logon so the chooser light stays green without a running
+   pi session), both with an **S4U principal**
+   (`New-ScheduledTaskPrincipal -LogonType S4U`): they run in a
+   non-interactive session, so the console apps never show a window and
+   keep running after logoff. Registering an S4U task needs one elevated
+   `Register-ScheduledTask` (plain Interactive tasks would work without
+   admin but pop a visible console window). cloudflared action args:
+   `tunnel --no-autoupdate run` — the flag belongs to `cloudflared tunnel`,
+   BEFORE `run`; after `run` it exits instantly with usage error (exit code
+   0, so the task's restart-on-failure never fires).
 5. `publicBaseUrls: ["https://pi-desktop.jeppebs.xyz"]` added to
    `pi/dashboard/config.json`
-
-Note: `schtasks /sc onlogon` requires elevation on Windows; the PowerShell
-route registers the same per-user logon task without admin.
 
 ## Secrets
 
