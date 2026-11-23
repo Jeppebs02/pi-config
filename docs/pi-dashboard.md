@@ -39,15 +39,36 @@ dashboard's pairing flow (trust mode `pair`) — approve once per browser.
 `publicBaseUrls` in `pi/dashboard/config.json` must contain the public URL
 or the server answers `host_not_allowed`.
 
-## Adding the Windows desktop (TODO)
+## Windows desktop (done 2026-11-23)
 
-1. `pi install npm:@blackbelt-technology/pi-agent-dashboard` (Node 26 needed)
-2. Create tunnel `pi-desktop` (cf CLI), `~/.cloudflared` config → `localhost:8000`
-3. DNS CNAME `pi-desktop.jeppebs.xyz` → `<tunnel-id>.cfargotunnel.com`
-4. cloudflared as a scheduled task; the chooser button goes green automatically
+1. `pi install npm:@blackbelt-technology/pi-agent-dashboard` — was already installed
+2. Tunnel `pi-desktop` (`cf tunnels create --config-src local --tunnel-secret …`,
+   id `66987e68-05a6-44bb-bb5c-ddf67a9d6e1c`), credentials
+   `~/.cloudflared/66987e68-….json`, config `~/.cloudflared/config.yml`
+   (ingress `pi-desktop.jeppebs.xyz` → `http://localhost:8000`; the
+   credentials-file line is omitted — cloudflared auto-discovers
+   `~/.cloudflared/<tunnel-id>.json`)
+3. DNS CNAME `pi-desktop.jeppebs.xyz` → `66987e68-….cfargotunnel.com` (proxied)
+4. Scheduled tasks (logon, no admin needed, PowerShell `Register-ScheduledTask`):
+   `cloudflared-pi-desktop` and `pi-dashboard` (server auto-started at logon
+   so the chooser light stays green without a running pi session)
+5. `publicBaseUrls: ["https://pi-desktop.jeppebs.xyz"]` added to
+   `pi/dashboard/config.json`
+
+Note: `schtasks /sc onlogon` requires elevation on Windows; the PowerShell
+route registers the same per-user logon task without admin.
 
 ## Secrets
 
-Tunnel credentials (`~/.cloudflared/pi-laptop.json`) and the dashboard
+Tunnel credentials (`~/.cloudflared/66987e68-….json` on the desktop,
+`~/.cloudflared/pi-laptop.json` on the laptop) and the dashboard
 pairing identity (`pi/dashboard/identity.key`) are machine-local secrets —
 never commit. Gitignored defensively via `pi/dashboard/`.
+
+The PI Dashboard server also re-asserts a machine-local absolute path in
+`pi/agent/settings.json`'s `packages` list (its extension self-registration;
+pi loads the extension from the `npm:` package ref regardless). A git clean
+filter (`filters/strip-local-packages.mjs`, wired by `.gitattributes` + the
+install scripts) strips those paths so they never show as a diff or get
+committed — keep the `npm:@blackbelt-technology/pi-agent-dashboard` entry
+as the only dashboard line in the committed file.

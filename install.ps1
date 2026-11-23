@@ -99,6 +99,20 @@ if ((Test-Path $McpJson) -and ((Get-Item $McpJson -Force).LinkType -ne "Symbolic
     }
 }
 
+# PI Dashboard rewrites a machine-local absolute path into pi\agent\settings.json's
+# packages list on every machine; it must never be committed. Configure the
+# clean filter that strips it (see .gitattributes + filters/).
+try {
+    $FilterScript = Join-Path $RepoDir "filters\strip-local-packages.mjs"
+    & git -C $RepoDir config filter.pi-local-packages.clean "node `"$FilterScript`""
+    Write-Host "Configured git clean filter pi-local-packages (strips local packages[] paths from settings.json)."
+} catch {
+    Write-Warning "Could not configure the settings.json clean filter (is git on PATH?).`
+$_"
+    Write-Warning "The machine-local PI Dashboard entry in settings.json will show as a diff:"
+    Write-Warning "  git config filter.pi-local-packages.clean ""node `"$RepoDir\filters\strip-local-packages.mjs`"""
+}
+
 # Exclude the repo from Windows Defender. The hack-skills / ctf-skills docs
 # contain reverse-shell and web-shell payload examples that real-time
 # protection flags as malware (Backdoor:*) and deletes on sight.

@@ -1,0 +1,9 @@
+# pi/agent/settings.json carries a machine-local packages[] entry that the PI
+# Dashboard server re-asserts on every machine; the clean filter strips it so
+# it never reaches a commit or shows as a phantom diff. The filter is
+# configured per clone by install.ps1 / install.sh (git config is local).
+pi/agent/settings.json filter=pi-local-packages
+
+# Shell scripts must stay LF even on autocrlf=true Windows checkouts —
+# CRLF breaks them in bash and trips shellcheck SC1017 on every line.
+*.sh text eol=lf

@@ -68,6 +68,13 @@ else
   echo "Linked $MCP_JSON -> mcp.linux.json"
 fi
 
+# PI Dashboard rewrites a machine-local absolute path into pi/agent/settings.json's
+# packages list on every machine; it must never be committed. Configure the
+# clean filter that strips it (see .gitattributes + filters/).
+if git -C "$REPO_DIR" config filter.pi-local-packages.clean "node \"$REPO_DIR/filters/strip-local-packages.mjs\"" 2>/dev/null; then
+  echo "Configured git clean filter pi-local-packages (strips local packages[] paths from settings.json)."
+fi
+
 if [ ! -f "$SRC/agent/auth.json" ]; then
   echo
   echo "Note: $SRC/agent/auth.json does not exist yet (it's gitignored)."
