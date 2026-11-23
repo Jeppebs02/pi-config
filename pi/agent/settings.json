@@ -23,7 +23,9 @@
     "npm:pi-lens",
     "npm:pi-mcp-adapter",
     "https://github.com/amosblomqvist/pi-observational-memory",
-    "npm:pi-subagents"
+    "npm:pi-subagents",
+    "npm:@blackbelt-technology/pi-agent-dashboard",
+    "/home/lain/Documents/pi-config/pi/agent/npm/node_modules/@blackbelt-technology/pi-agent-dashboard/packages/extension"
   ],
   "observational-memory": {
     "models": {

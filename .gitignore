@@ -26,11 +26,9 @@ pi/agent/git/
 # Pi's managed install of itself (releases/<version>/node_modules + current-version)
 pi/agent/install/
 
-# toilet-pi: machine connect URL + auth token are secrets — see docs/toilet-pi.md.
-# Commit only toilet-pi.json.example. toilet-pi-server.json (server admin token)
-# is included defensively in case the server is ever run locally for testing.
-pi/agent/toilet-pi.json
-pi/agent/toilet-pi-server.json
+# PI Dashboard runtime state (sockets, pairing identity, per-machine config)
+# written by the dashboard server through the agent symlink — machine-local
+pi/dashboard/
 
 # OS / editor cruft
 .DS_Store

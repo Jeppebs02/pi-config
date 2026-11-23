@@ -466,24 +466,23 @@ Other knobs (`chunkTokens`, `poolTargetTokens`, `compactAtContextTokens`,
 testing. `passive` is a power-user setting distinct from the per-session
 on/off gate.
 
-## toilet-pi remote control
+## PI Dashboard remote control
 
-**Removed from `pi` on 2026-11-20** — the package reference is gone from
-`settings.json` (to be replaced by a more robust remote-control solution, TBD). The
-**server is still running on the homelab**: its docker container and Cloudflare DNS
-record still need to be taken down (pending — needs the Home WireGuard tunnel working).
-To revert: `pi install https://github.com/mrexodia/toilet-pi` and re-register the
-supervisor service.
+[toilet-pi](https://github.com/mrexodia/toilet-pi) was removed 2026-11-20;
+its homelab server container and `toilet.jeppebs.xyz` DNS record were torn down
+2026-11-23. Its replacement is
+[PI Dashboard](https://github.com/BlackBeltTechnology/pi-agent-dashboard),
+vendored as a `pi` package (`pi install npm:@blackbelt-technology/pi-agent-dashboard`,
+committed in `settings.json`). The bridge extension mirrors every running pi
+session to a browser (transcripts, prompts, abort, resume) and auto-starts the
+server on `127.0.0.1:8000`.
 
-[toilet-pi](https://github.com/mrexodia/toilet-pi) lets you watch and control `pi`
-sessions on this machine from a browser. It's vendored as a `pi` package (see
-[Installing packages](#installing-packages) above) — committed in `settings.json`,
-cloned by `pi` itself — and `install.ps1`/`install.sh` additionally register its
-supervisor process as a Windows Scheduled Task / systemd `--user` service so it keeps
-running in the background. See [docs/toilet-pi.md](docs/toilet-pi.md) (kept for
-reference and teardown) for setup,
-connecting a machine via `/toilet-pi setup <machine-url>`, and an important note about
-treating the machine connect URL and server token as secrets.
+Remote access: each machine exposes its dashboard via a Cloudflare Tunnel
+(`pi-laptop.jeppebs.xyz` on this laptop, `pi-desktop.jeppebs.xyz` on the
+Windows box once set up). `pi.jeppebs.xyz` is a chooser page on the homelab
+(behind Cloudflare Access) with per-machine green/red reachability lights.
+Machine-local pieces — systemd services, tunnel credentials, dashboard config,
+pairing — and the Windows recipe: [docs/pi-dashboard.md](docs/pi-dashboard.md).
 
 ## DaVinci Resolve MCP
 
