@@ -3,15 +3,17 @@
   "lastChangelogVersion": "1.6.0",
   "theme": "gold-noir",
   "defaultProvider": "zai",
-  "defaultModel": "glm-5.3",
+  "defaultModel": "glm-5.4",
   "defaultThinkingLevel": "high",
   "modelThinkingLevels": {
+    "zai/glm-5.4": "max",
     "zai/glm-5.3": "max",
     "zai/glm-5.3-flash": "max"
   },
   "enabledModels": [
     "zai/glm-5.3-flash",
     "zai/glm-5.3",
+    "zai/glm-5.4",
     "deepinfra/deepseek-ai/DeepSeek-V4.1-Flash-1017",
     "moonshotai/kimi-k3"
   ],
