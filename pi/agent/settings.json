@@ -12,7 +12,8 @@
   "enabledModels": [
     "zai/glm-5.3-flash",
     "zai/glm-5.3",
-    "deepinfra/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+    "deepinfra/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "moonshotai/kimi-k3"
   ],
   "defaultProjectTrust": "ask",
   "packages": [
