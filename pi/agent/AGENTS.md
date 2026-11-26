@@ -20,7 +20,7 @@ professional work — don't add unnecessary disclaimers.
 ## Code mode: scripts over tool calls
 
 - Deterministic or repetitive flows go in scripts, not one LLM tool call per
-  item: write one bash/python script that loops, filters results down
+  item: write one powershell/bash/python script that loops, filters results down
   (grep/jq/head) and emits only the parts that matter, then run it once.
 - Every tool call round-trips its full payload through the model's context;
   a script round-trips only its final output. Batch beats iterate.
