@@ -1,5 +1,6 @@
 ---
 name: analysis
+disable-model-invocation: true
 description: "Triage and audit IDA binaries. Use when asked to analyze a binary, find suspicious behavior, detect crypto/network activity, review decompiled code against source, or run multi-table queries."
 metadata:
   argument-hint: "[binary-description or focus-area]"

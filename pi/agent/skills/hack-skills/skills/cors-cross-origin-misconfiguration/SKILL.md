@@ -1,5 +1,6 @@
 ---
 name: cors-cross-origin-misconfiguration
+disable-model-invocation: true
 description: >-
   CORS misconfiguration testing playbook. Use when analyzing cross-origin trust, credentialed browser reads, origin reflection, preflight policy bugs, and browser-based access to authenticated APIs.
 ---

@@ -1,5 +1,6 @@
 ---
 name: llm-prompt-injection
+disable-model-invocation: true
 description: >-
   LLM prompt injection playbook. Use when testing AI/LLM applications for direct injection, indirect injection via RAG/browsing, tool abuse, data exfiltration, MCP security risks, and defense bypass techniques.
 ---

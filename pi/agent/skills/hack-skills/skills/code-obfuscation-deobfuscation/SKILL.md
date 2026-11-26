@@ -1,5 +1,6 @@
 ---
 name: code-obfuscation-deobfuscation
+disable-model-invocation: true
 description: >-
   Code obfuscation analysis and deobfuscation playbook. Use when reversing
   binaries protected by junk code, opaque predicates, self-modifying code,

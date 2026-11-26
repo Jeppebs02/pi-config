@@ -8,6 +8,25 @@ allowed-tools:
   - Grep
 ---
 
+## Opt-in skills (not in the system prompt)
+
+The other 14 skills in this collection are opt-in: pi does not list them, so load one by reading its file relative to this one. `/skill:<name>` only works when the user types it.
+
+- `analysis` -> `../analysis/SKILL.md`
+- `annotations` -> `../annotations/SKILL.md`
+- `data` -> `../data/SKILL.md`
+- `debugger` -> `../debugger/SKILL.md`
+- `decompiler` -> `../decompiler/SKILL.md`
+- `disassembly` -> `../disassembly/SKILL.md`
+- `functions` -> `../functions/SKILL.md`
+- `grep` -> `../grep/SKILL.md`
+- `idapython` -> `../idapython/SKILL.md`
+- `re-source` -> `../re-source/SKILL.md`
+- `storage` -> `../storage/SKILL.md`
+- `types` -> `../types/SKILL.md`
+- `ui-context` -> `../ui-context/SKILL.md`
+- `xrefs` -> `../xrefs/SKILL.md`
+
 ## CLI Help (verbatim `idasql --help`)
 
 ```

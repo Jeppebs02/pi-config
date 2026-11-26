@@ -1,5 +1,6 @@
 ---
 name: defi-attack-patterns
+disable-model-invocation: true
 description: >-
   DeFi attack pattern playbook. Use when analyzing flash loan attacks, price oracle manipulation, MEV sandwich attacks, governance exploits, bridge vulnerabilities, and token standard edge cases in decentralized finance protocols.
 ---

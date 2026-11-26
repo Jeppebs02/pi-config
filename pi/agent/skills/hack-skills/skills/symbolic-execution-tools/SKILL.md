@@ -1,5 +1,6 @@
 ---
 name: symbolic-execution-tools
+disable-model-invocation: true
 description: >-
   Symbolic execution and constraint solving playbook. Use when solving CTF
   reversing challenges, recovering keys, bypassing checks, or automating

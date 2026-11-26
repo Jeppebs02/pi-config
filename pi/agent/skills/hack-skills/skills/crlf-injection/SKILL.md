@@ -1,5 +1,6 @@
 ---
 name: crlf-injection
+disable-model-invocation: true
 description: >-
   CRLF injection playbook. Use when user input reaches HTTP response headers, Location redirects, Set-Cookie values, or log files where carriage-return/line-feed characters can split or inject content.
 ---

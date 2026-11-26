@@ -1,5 +1,6 @@
 ---
 name: steganography-techniques
+disable-model-invocation: true
 description: >-
   Steganography detection and extraction playbook. Use when analyzing images (LSB, PNG chunks, JPEG DCT, EXIF), audio (spectrogram, DTMF), files (polyglots, appended data, ADS), and text (whitespace, zero-width, homoglyphs) for hidden data.
 ---

@@ -1,5 +1,6 @@
 ---
 name: recon-and-methodology
+disable-model-invocation: true
 description: >-
   Reconnaissance and methodology playbook. Use when mapping assets, discovering endpoints, fingerprinting technology, and building a structured testing plan for a new target.
 ---

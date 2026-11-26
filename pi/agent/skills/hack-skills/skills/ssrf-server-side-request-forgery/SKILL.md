@@ -1,5 +1,6 @@
 ---
 name: ssrf-server-side-request-forgery
+disable-model-invocation: true
 description: >-
   SSRF playbook. Use when the server fetches URLs, resolves hostnames, imports remote content, or can be driven toward internal networks, cloud metadata, or secondary protocols.
 ---

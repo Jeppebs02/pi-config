@@ -1,5 +1,6 @@
 ---
 name: business-logic-vulnerabilities
+disable-model-invocation: true
 description: >-
   Business logic vulnerability playbook. Use when reasoning about workflows, race conditions, price manipulation, coupon abuse, state machines, and multi-step authorization gaps.
 ---

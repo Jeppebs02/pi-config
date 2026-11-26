@@ -1,5 +1,6 @@
 ---
 name: sandbox-escape-techniques
+disable-model-invocation: true
 description: >-
   Sandbox escape playbook. Use when breaking out of Python sandbox, Lua sandbox, seccomp filter, chroot jail, container/Docker, browser sandbox, or namespace isolation to achieve unrestricted code execution or file access.
 ---

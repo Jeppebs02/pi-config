@@ -278,11 +278,33 @@ you anything and it runs a **probe → plan → teach** loop instead of dumping 
 | --- | --- | --- |
 | `teach` skill | `pi/agent/skills/teach/` | Teaching philosophy: unconditional truths first, "how could I have discovered this?" motivation, quiz-check every node |
 | `visualize` skill | `pi/agent/skills/visualize/` | Delegates diagrams to the maker subagents when a picture beats prose |
+| `homelab-stack-update` skill | `pi/agent/skills/homelab-stack-update/` | Update + verify every compose stack on the homelab docker host over SSH; the scripts run on the host and skip Minecraft and CI-deployed stacks |
 | `quiz` extension | `pi/agent/extensions/quiz.ts` | Graded multiple-choice popups (✓/✗, correct answer, explanation) |
 | `ask-user-question` ext | `pi/agent/extensions/ask-user-question.ts` | Popup questionnaires — **replaces** the `@juicesharp/rpiv-ask-user-question` package (see below) |
 | `md-log` extension | `pi/agent/extensions/md-log.ts` | Mirrors the session to a markdown file (Obsidian-friendly: LaTeX + mermaid render) |
 | `visual-tools` extension | `pi/agent/extensions/visual-tools/` | write/edit/render tools for Mermaid and SVG subagents |
 | `agents/` | `pi/agent/agents/` | `researcher` (web fact-checking), `mermaid-maker`, `svg-maker` |
+
+### Skill tiers
+
+Most skills are **opt-in**: their `SKILL.md` carries `disable-model-invocation: true`, so pi
+leaves them out of the system prompt (they stay usable as `/skill:<name>`). Each collection
+keeps an **always-on router** whose body indexes the rest by relative path:
+
+| Collection | Always-on | Opt-in, reached through the router |
+| --- | --- | --- |
+| `hack-skills/` | `hack` + the six P1 routers (`api-sec`, `auth-sec`, `injection-checking`, `business-logic-vuln`, `file-access-vuln`, `recon-for-sec`) | 91 topic skills, via `hack` |
+| `ctf-skills/` | `solve-challenge` | 10 `ctf-*` skills |
+| `idasql/` | `connect` | 14 topic skills |
+| `cloudflare/` | `cloudflare`, `cf-cli`, `wrangler`, `workers-development`, `web-perf` | 17, via `cloudflare` |
+| `design/`, top-level skills | everything (besides 3 that were already opt-in) | — |
+
+To add a skill to a collection: hide it **and** add its path to the router's index — a hidden
+skill that is not indexed is unreachable. Measured with pi's own loader on 2026-11-26:
+175 visible skills / ~19K tokens of system prompt -> 44 / ~6K.
+
+`cloudflare/` is Cloudflare's official skill pack, vendored from `cloudflare/skills` at commit
+`5108325` (previously installed by `npx skills` into `~/.agents/skills`, which is no longer used).
 
 ### Using it
 

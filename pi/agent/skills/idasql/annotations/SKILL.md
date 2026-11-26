@@ -1,5 +1,6 @@
 ---
 name: annotations
+disable-model-invocation: true
 description: "Edit IDA databases. Use when asked to add comments, rename symbols, apply types, create bookmarks, or clean up decompiled code for review."
 allowed-tools:
   - Bash

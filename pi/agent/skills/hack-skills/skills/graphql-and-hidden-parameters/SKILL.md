@@ -1,5 +1,6 @@
 ---
 name: graphql-and-hidden-parameters
+disable-model-invocation: true
 description: >-
   GraphQL and hidden parameter testing playbook. Use when exploring introspection, batching, undocumented fields, hidden parameters, schema abuse, and GraphQL authorization gaps.
 ---

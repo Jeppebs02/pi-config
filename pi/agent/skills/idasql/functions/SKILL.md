@@ -1,5 +1,6 @@
 ---
 name: functions
+disable-model-invocation: true
 description: "Complete idasql SQL function reference catalog. Use when looking up function signatures, parameters, or usage examples."
 user-invocable: false
 allowed-tools:

@@ -1,5 +1,6 @@
 ---
 name: storage
+disable-model-invocation: true
 description: "Persistent key-value storage in IDA databases. Use when asked to store metadata, track progress, or persist session state via netnode_kv."
 allowed-tools:
   - Bash

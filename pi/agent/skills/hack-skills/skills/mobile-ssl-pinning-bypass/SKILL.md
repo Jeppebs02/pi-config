@@ -1,5 +1,6 @@
 ---
 name: mobile-ssl-pinning-bypass
+disable-model-invocation: true
 description: >-
   Mobile SSL pinning bypass playbook. Use when intercepting HTTPS traffic from mobile applications that implement certificate pinning, public key pinning, or SPKI hash pinning on Android and iOS, including React Native, Flutter, and Xamarin frameworks.
 ---

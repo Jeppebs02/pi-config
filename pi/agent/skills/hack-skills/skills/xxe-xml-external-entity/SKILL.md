@@ -1,5 +1,6 @@
 ---
 name: xxe-xml-external-entity
+disable-model-invocation: true
 description: >-
   XXE playbook. Use when XML, SVG, OOXML, SOAP, or parser-driven imports may resolve external entities, files, or internal network resources.
 ---

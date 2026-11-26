@@ -1,5 +1,6 @@
 ---
 name: anti-debugging-techniques
+disable-model-invocation: true
 description: >-
   Anti-debugging detection and bypass playbook. Use when reversing protected
   binaries that detect debuggers via ptrace, PEB flags, timing checks, or

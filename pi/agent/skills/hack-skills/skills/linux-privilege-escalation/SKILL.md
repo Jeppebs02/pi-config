@@ -1,5 +1,6 @@
 ---
 name: linux-privilege-escalation
+disable-model-invocation: true
 description: >-
   Linux privilege escalation playbook. Use when you have low-privilege shell access and need to escalate to root via SUID/SGID binaries, capabilities, cron abuse, kernel exploits, misconfigurations, or credential harvesting on Linux systems.
 ---

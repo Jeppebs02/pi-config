@@ -1,5 +1,6 @@
 ---
 name: dns-rebinding-attacks
+disable-model-invocation: true
 description: >-
   DNS rebinding attack playbook. Use when testing applications that trust DNS resolution for origin checks, interact with internal services from browser context, or when SSRF is not possible server-side but the target has client-side fetch/XHR to attacker-controlled domains.
 ---

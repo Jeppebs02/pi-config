@@ -1,5 +1,6 @@
 ---
 name: grep
+disable-model-invocation: true
 description: "Search named IDA entities by pattern. Use when asked to find functions, labels, types, or members by name, or to seed xref/decompiler workflows from a name lookup."
 metadata:
   argument-hint: "[search-pattern]"

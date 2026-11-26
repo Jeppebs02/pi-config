@@ -1,5 +1,6 @@
 ---
 name: web-cache-deception
+disable-model-invocation: true
 description: >-
   Web cache deception and poisoning playbook. Use when CDN, reverse proxy, or application caching may serve sensitive authenticated content to other users due to path confusion or cache key manipulation.
 ---

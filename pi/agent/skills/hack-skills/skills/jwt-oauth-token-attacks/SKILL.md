@@ -1,5 +1,6 @@
 ---
 name: jwt-oauth-token-attacks
+disable-model-invocation: true
 description: >-
   JWT and OAuth token attack playbook. Use when validating token trust, signing algorithms, key handling, claim abuse, bearer flows, and OAuth account-binding weaknesses.
 ---

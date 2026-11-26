@@ -1,5 +1,6 @@
 ---
 name: lattice-crypto-attacks
+disable-model-invocation: true
 description: >-
   Lattice-based cryptanalysis playbook. Use when attacking RSA via Coppersmith
   small roots, recovering DSA/ECDSA nonces from bias, solving knapsack

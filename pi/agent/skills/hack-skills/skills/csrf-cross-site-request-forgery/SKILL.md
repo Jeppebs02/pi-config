@@ -1,5 +1,6 @@
 ---
 name: csrf-cross-site-request-forgery
+disable-model-invocation: true
 description: >-
   CSRF testing playbook. Use when reviewing state-changing web flows, anti-CSRF defenses, SameSite behavior, JSON CSRF, login CSRF, and OAuth state handling.
 ---

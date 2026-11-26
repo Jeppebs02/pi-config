@@ -1,5 +1,6 @@
 ---
 name: decompiler
+disable-model-invocation: true
 description: "Decompile and analyze IDA functions. Use when asked for pseudocode, ctree AST analysis, local variables, labels, or decompiler-driven cleanup."
 metadata:
   argument-hint: "[function-name or address]"

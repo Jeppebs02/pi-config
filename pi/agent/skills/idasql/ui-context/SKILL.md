@@ -1,5 +1,6 @@
 ---
 name: ui-context
+disable-model-invocation: true
 description: "Capture live IDA UI context. Use when the user references what's on screen, what's selected, or asks about the current view in IDA's GUI."
 allowed-tools:
   - Bash

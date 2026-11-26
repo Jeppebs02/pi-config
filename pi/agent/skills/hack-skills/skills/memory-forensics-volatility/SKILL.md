@@ -1,5 +1,6 @@
 ---
 name: memory-forensics-volatility
+disable-model-invocation: true
 description: >-
   Memory forensics playbook using Volatility 2/3. Use when analyzing memory dumps for malware analysis, credential extraction, process investigation, code injection detection, and incident response timeline reconstruction.
 ---

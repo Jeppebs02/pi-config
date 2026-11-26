@@ -1,5 +1,6 @@
 ---
 name: vm-and-bytecode-reverse
+disable-model-invocation: true
 description: >-
   Custom VM and bytecode reverse engineering playbook. Use when CTF challenges
   or protected software implement custom virtual machines with proprietary

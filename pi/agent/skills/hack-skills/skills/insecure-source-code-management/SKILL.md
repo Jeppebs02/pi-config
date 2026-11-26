@@ -1,5 +1,6 @@
 ---
 name: insecure-source-code-management
+disable-model-invocation: true
 description: >-
   Source control and artifact exposure (.git, .svn, .hg, backups, .env). Use when recon finds VCS paths, 403 on hidden dirs, or backup/config leaks during authorized testing.
 ---

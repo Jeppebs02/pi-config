@@ -1,5 +1,6 @@
 ---
 name: clickjacking
+disable-model-invocation: true
 description: >-
   Clickjacking playbook. Use when testing whether target pages can be framed, whether X-Frame-Options or CSP frame-ancestors are properly configured, and whether UI redress attacks can trigger sensitive actions.
 ---

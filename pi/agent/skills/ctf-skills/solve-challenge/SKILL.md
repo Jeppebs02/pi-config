@@ -9,6 +9,21 @@ metadata:
   argument-hint: "[category] [challenge-file-or-url]"
 ---
 
+## Opt-in skills (not in the system prompt)
+
+The other 10 skills in this collection are opt-in: pi does not list them, so load one by reading its file relative to this one. `/skill:<name>` only works when the user types it.
+
+- `ctf-ai-ml` -> `../ctf-ai-ml/SKILL.md`
+- `ctf-crypto` -> `../ctf-crypto/SKILL.md`
+- `ctf-forensics` -> `../ctf-forensics/SKILL.md`
+- `ctf-malware` -> `../ctf-malware/SKILL.md`
+- `ctf-misc` -> `../ctf-misc/SKILL.md`
+- `ctf-osint` -> `../ctf-osint/SKILL.md`
+- `ctf-pwn` -> `../ctf-pwn/SKILL.md`
+- `ctf-reverse` -> `../ctf-reverse/SKILL.md`
+- `ctf-web` -> `../ctf-web/SKILL.md`
+- `ctf-writeup` -> `../ctf-writeup/SKILL.md`
+
 # CTF Challenge Solver
 
 You're a skilled CTF player. Your goal is to solve the challenge and find the flag.

@@ -1,5 +1,6 @@
 ---
 name: windows-lateral-movement
+disable-model-invocation: true
 description: >-
   Windows lateral movement playbook. Use when pivoting between Windows hosts via PsExec, WMI, WinRM, DCOM, RDP, pass-the-hash, overpass-the-hash, or pass-the-ticket techniques.
 ---

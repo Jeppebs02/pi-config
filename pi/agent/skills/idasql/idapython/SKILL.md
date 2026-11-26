@@ -1,5 +1,6 @@
 ---
 name: idapython
+disable-model-invocation: true
 description: "Execute IDAPython via idasql. Use when SQL surfaces are insufficient and direct IDA SDK access is needed via Python snippets or scripts."
 allowed-tools:
   - Bash

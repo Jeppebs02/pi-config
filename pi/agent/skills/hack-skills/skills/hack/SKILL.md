@@ -1,11 +1,111 @@
 ---
 name: hack
 description: >-
-  Entry P0 primary router for HackSkills. Use when the task involves web
-  application testing, API security assessment, recon, vulnerability triage,
-  exploit path planning, or choosing the right next category skill before any
-  deep topic skill.
+  Entry P0 primary router for HackSkills, and the index for every security topic
+  skill in this collection. Use when the task involves web application testing,
+  API security assessment, recon, vulnerability triage, exploit path planning, or
+  choosing the right next category skill before any deep topic skill. Also use it
+  to locate the opt-in topic skills that are not listed in the system prompt:
+  Active Directory and Kerberos, Linux/Windows/macOS privilege escalation and
+  lateral movement, exploit development, reverse engineering and anti-analysis,
+  crypto attacks, mobile, cloud, container and Kubernetes, network protocols.
 ---
+
+## Opt-in skills (not in the system prompt)
+
+The other 91 skills in this collection are opt-in: pi does not list them, so load one by reading its file relative to this one. `/skill:<name>` only works when the user types it.
+
+- `401-403-bypass-techniques` -> `../401-403-bypass-techniques/SKILL.md`
+- `active-directory-acl-abuse` -> `../active-directory-acl-abuse/SKILL.md`
+- `active-directory-certificate-services` -> `../active-directory-certificate-services/SKILL.md`
+- `active-directory-kerberos-attacks` -> `../active-directory-kerberos-attacks/SKILL.md`
+- `ai-ml-security` -> `../ai-ml-security/SKILL.md`
+- `android-pentesting-tricks` -> `../android-pentesting-tricks/SKILL.md`
+- `anti-debugging-techniques` -> `../anti-debugging-techniques/SKILL.md`
+- `api-auth-and-jwt-abuse` -> `../api-auth-and-jwt-abuse/SKILL.md`
+- `api-authorization-and-bola` -> `../api-authorization-and-bola/SKILL.md`
+- `api-recon-and-docs` -> `../api-recon-and-docs/SKILL.md`
+- `arbitrary-write-to-rce` -> `../arbitrary-write-to-rce/SKILL.md`
+- `authbypass-authentication-flaws` -> `../authbypass-authentication-flaws/SKILL.md`
+- `binary-protection-bypass` -> `../binary-protection-bypass/SKILL.md`
+- `browser-exploitation-v8` -> `../browser-exploitation-v8/SKILL.md`
+- `business-logic-vulnerabilities` -> `../business-logic-vulnerabilities/SKILL.md`
+- `classical-cipher-analysis` -> `../classical-cipher-analysis/SKILL.md`
+- `clickjacking` -> `../clickjacking/SKILL.md`
+- `cmdi-command-injection` -> `../cmdi-command-injection/SKILL.md`
+- `code-obfuscation-deobfuscation` -> `../code-obfuscation-deobfuscation/SKILL.md`
+- `container-escape-techniques` -> `../container-escape-techniques/SKILL.md`
+- `cors-cross-origin-misconfiguration` -> `../cors-cross-origin-misconfiguration/SKILL.md`
+- `crlf-injection` -> `../crlf-injection/SKILL.md`
+- `csp-bypass-advanced` -> `../csp-bypass-advanced/SKILL.md`
+- `csrf-cross-site-request-forgery` -> `../csrf-cross-site-request-forgery/SKILL.md`
+- `csv-formula-injection` -> `../csv-formula-injection/SKILL.md`
+- `dangling-markup-injection` -> `../dangling-markup-injection/SKILL.md`
+- `defi-attack-patterns` -> `../defi-attack-patterns/SKILL.md`
+- `dependency-confusion` -> `../dependency-confusion/SKILL.md`
+- `deserialization-insecure` -> `../deserialization-insecure/SKILL.md`
+- `dns-rebinding-attacks` -> `../dns-rebinding-attacks/SKILL.md`
+- `email-header-injection` -> `../email-header-injection/SKILL.md`
+- `expression-language-injection` -> `../expression-language-injection/SKILL.md`
+- `format-string-exploitation` -> `../format-string-exploitation/SKILL.md`
+- `ghost-bits-cast-attack` -> `../ghost-bits-cast-attack/SKILL.md`
+- `graphql-and-hidden-parameters` -> `../graphql-and-hidden-parameters/SKILL.md`
+- `hash-attack-techniques` -> `../hash-attack-techniques/SKILL.md`
+- `heap-exploitation` -> `../heap-exploitation/SKILL.md`
+- `http-host-header-attacks` -> `../http-host-header-attacks/SKILL.md`
+- `http-parameter-pollution` -> `../http-parameter-pollution/SKILL.md`
+- `http2-specific-attacks` -> `../http2-specific-attacks/SKILL.md`
+- `idor-broken-object-authorization` -> `../idor-broken-object-authorization/SKILL.md`
+- `insecure-source-code-management` -> `../insecure-source-code-management/SKILL.md`
+- `ios-pentesting-tricks` -> `../ios-pentesting-tricks/SKILL.md`
+- `jndi-injection` -> `../jndi-injection/SKILL.md`
+- `jwt-oauth-token-attacks` -> `../jwt-oauth-token-attacks/SKILL.md`
+- `kernel-exploitation` -> `../kernel-exploitation/SKILL.md`
+- `kubernetes-pentesting` -> `../kubernetes-pentesting/SKILL.md`
+- `lattice-crypto-attacks` -> `../lattice-crypto-attacks/SKILL.md`
+- `linux-lateral-movement` -> `../linux-lateral-movement/SKILL.md`
+- `linux-privilege-escalation` -> `../linux-privilege-escalation/SKILL.md`
+- `linux-security-bypass` -> `../linux-security-bypass/SKILL.md`
+- `llm-prompt-injection` -> `../llm-prompt-injection/SKILL.md`
+- `macos-process-injection` -> `../macos-process-injection/SKILL.md`
+- `macos-security-bypass` -> `../macos-security-bypass/SKILL.md`
+- `memory-forensics-volatility` -> `../memory-forensics-volatility/SKILL.md`
+- `mobile-ssl-pinning-bypass` -> `../mobile-ssl-pinning-bypass/SKILL.md`
+- `network-protocol-attacks` -> `../network-protocol-attacks/SKILL.md`
+- `ntlm-relay-coercion` -> `../ntlm-relay-coercion/SKILL.md`
+- `oauth-oidc-misconfiguration` -> `../oauth-oidc-misconfiguration/SKILL.md`
+- `open-redirect` -> `../open-redirect/SKILL.md`
+- `path-traversal-lfi` -> `../path-traversal-lfi/SKILL.md`
+- `prototype-pollution` -> `../prototype-pollution/SKILL.md`
+- `prototype-pollution-advanced` -> `../prototype-pollution-advanced/SKILL.md`
+- `race-condition` -> `../race-condition/SKILL.md`
+- `recon-and-methodology` -> `../recon-and-methodology/SKILL.md`
+- `request-smuggling` -> `../request-smuggling/SKILL.md`
+- `rsa-attack-techniques` -> `../rsa-attack-techniques/SKILL.md`
+- `saml-sso-assertion-attacks` -> `../saml-sso-assertion-attacks/SKILL.md`
+- `sandbox-escape-techniques` -> `../sandbox-escape-techniques/SKILL.md`
+- `smart-contract-vulnerabilities` -> `../smart-contract-vulnerabilities/SKILL.md`
+- `sqli-sql-injection` -> `../sqli-sql-injection/SKILL.md`
+- `ssrf-server-side-request-forgery` -> `../ssrf-server-side-request-forgery/SKILL.md`
+- `ssti-server-side-template-injection` -> `../ssti-server-side-template-injection/SKILL.md`
+- `stack-overflow-and-rop` -> `../stack-overflow-and-rop/SKILL.md`
+- `steganography-techniques` -> `../steganography-techniques/SKILL.md`
+- `subdomain-takeover` -> `../subdomain-takeover/SKILL.md`
+- `symbolic-execution-tools` -> `../symbolic-execution-tools/SKILL.md`
+- `symmetric-cipher-attacks` -> `../symmetric-cipher-attacks/SKILL.md`
+- `traffic-analysis-pcap` -> `../traffic-analysis-pcap/SKILL.md`
+- `tunneling-and-pivoting` -> `../tunneling-and-pivoting/SKILL.md`
+- `type-juggling` -> `../type-juggling/SKILL.md`
+- `vm-and-bytecode-reverse` -> `../vm-and-bytecode-reverse/SKILL.md`
+- `waf-bypass-techniques` -> `../waf-bypass-techniques/SKILL.md`
+- `web-cache-deception` -> `../web-cache-deception/SKILL.md`
+- `websocket-security` -> `../websocket-security/SKILL.md`
+- `windows-av-evasion` -> `../windows-av-evasion/SKILL.md`
+- `windows-lateral-movement` -> `../windows-lateral-movement/SKILL.md`
+- `windows-privilege-escalation` -> `../windows-privilege-escalation/SKILL.md`
+- `xslt-injection` -> `../xslt-injection/SKILL.md`
+- `xss-cross-site-scripting` -> `../xss-cross-site-scripting/SKILL.md`
+- `xxe-xml-external-entity` -> `../xxe-xml-external-entity/SKILL.md`
 
 # HACKING SKILLS / HackSkills
 

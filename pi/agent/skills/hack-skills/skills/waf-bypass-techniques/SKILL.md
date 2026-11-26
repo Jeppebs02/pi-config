@@ -1,5 +1,6 @@
 ---
 name: waf-bypass-techniques
+disable-model-invocation: true
 description: >-
   WAF bypass methodology and generic evasion techniques. Use when a web application
   firewall blocks injection payloads (SQLi, XSS, RCE) and you need to craft

@@ -1,5 +1,6 @@
 ---
 name: rsa-attack-techniques
+disable-model-invocation: true
 description: >-
   RSA attack playbook for CTF and real-world cryptanalysis. Use when given
   RSA parameters (n, e, c) and need to recover plaintext by exploiting

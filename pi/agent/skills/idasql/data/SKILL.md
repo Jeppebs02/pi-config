@@ -1,5 +1,6 @@
 ---
 name: data
+disable-model-invocation: true
 description: "Query IDA strings, bytes, and binary data. Use when asked to search strings, find byte patterns, rebuild string tables, or analyze binary content."
 allowed-tools:
   - Bash

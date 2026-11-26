@@ -1,5 +1,6 @@
 ---
 name: xss-cross-site-scripting
+disable-model-invocation: true
 description: >-
   XSS playbook. Use when user-controlled content reaches HTML, attributes, JavaScript, DOM sinks, uploads, or multi-context rendering paths.
 ---

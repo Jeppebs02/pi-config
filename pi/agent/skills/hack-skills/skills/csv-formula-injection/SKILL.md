@@ -1,5 +1,6 @@
 ---
 name: csv-formula-injection
+disable-model-invocation: true
 description: >-
   CSV/spreadsheet formula injection (DDE, Excel/LibreOffice, Google Sheets IMPORT*). Use when exports, imports, or user fields feed spreadsheets or reporting tools.
 ---

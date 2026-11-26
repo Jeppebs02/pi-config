@@ -1,5 +1,6 @@
 ---
 name: oauth-oidc-misconfiguration
+disable-model-invocation: true
 description: >-
   OAuth and OIDC misconfiguration testing playbook. Use when reviewing redirect URI handling, state and nonce validation, PKCE, token audience, callback binding, and identity-provider trust flaws.
 ---

@@ -1,5 +1,6 @@
 ---
 name: request-smuggling
+disable-model-invocation: true
 description: >-
   HTTP request smuggling and desynchronization testing. Use when front proxies,
   CDNs, or load balancers disagree with the origin on message framing

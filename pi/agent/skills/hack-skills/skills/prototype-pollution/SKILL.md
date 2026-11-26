@@ -1,5 +1,6 @@
 ---
 name: prototype-pollution
+disable-model-invocation: true
 description: >-
   Prototype pollution testing for JavaScript stacks. Use when user input is
   merged into objects (query parsers, JSON bodies, deep assign), when

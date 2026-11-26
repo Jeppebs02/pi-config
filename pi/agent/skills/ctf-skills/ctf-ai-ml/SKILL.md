@@ -1,5 +1,6 @@
 ---
 name: ctf-ai-ml
+disable-model-invocation: true
 description: Provides AI and machine learning techniques for CTF challenges. Use when attacking ML models, crafting adversarial examples, performing model extraction, prompt injection, membership inference, training data poisoning, fine-tuning manipulation, neural network analysis, LoRA adapter exploitation, LLM jailbreaking, or solving AI-related puzzles.
 license: MIT
 compatibility: Requires filesystem-based agent (Claude Code or similar) with bash, Python 3, and internet access for tool installation.

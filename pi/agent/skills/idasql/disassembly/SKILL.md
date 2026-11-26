@@ -1,5 +1,6 @@
 ---
 name: disassembly
+disable-model-invocation: true
 description: "Query IDA disassembly. Use when asked about functions, segments, instructions, blocks, operands, control flow, or raw code structure."
 metadata:
   argument-hint: "[function-name or address]"

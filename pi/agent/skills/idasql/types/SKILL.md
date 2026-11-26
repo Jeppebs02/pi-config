@@ -1,5 +1,6 @@
 ---
 name: types
+disable-model-invocation: true
 description: "IDA type system. Use when asked to create, modify, or apply structs, unions, enums, typedefs, or parse C declarations."
 allowed-tools:
   - Bash

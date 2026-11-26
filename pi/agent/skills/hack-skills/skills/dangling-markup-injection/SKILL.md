@@ -1,5 +1,6 @@
 ---
 name: dangling-markup-injection
+disable-model-invocation: true
 description: >-
   Dangling markup injection playbook. Use when HTML injection is possible but
   JavaScript execution is blocked (CSP, sanitizer strips event handlers, WAF

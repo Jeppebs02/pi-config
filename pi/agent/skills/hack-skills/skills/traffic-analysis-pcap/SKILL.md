@@ -1,5 +1,6 @@
 ---
 name: traffic-analysis-pcap
+disable-model-invocation: true
 description: >-
   Traffic analysis and PCAP forensics playbook. Use when analyzing network captures including Wireshark filters, protocol analysis (HTTP/DNS/FTP/SMTP/USB/WiFi), data extraction, covert channel detection, PCAP repair, TLS decryption, and tshark command-line analysis.
 ---

@@ -1,5 +1,6 @@
 ---
 name: classical-cipher-analysis
+disable-model-invocation: true
 description: >-
   Classical cipher analysis playbook. Use when encountering substitution
   ciphers, Vigenere, transposition, XOR, or encoded text in CTF challenges

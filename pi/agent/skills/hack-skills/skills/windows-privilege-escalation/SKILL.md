@@ -1,5 +1,6 @@
 ---
 name: windows-privilege-escalation
+disable-model-invocation: true
 description: >-
   Windows local privilege escalation playbook. Use when you have low-privilege shell access on Windows and need to escalate via token abuse, Potato exploits, service misconfigurations, DLL hijacking, UAC bypass, or registry autoruns.
 ---

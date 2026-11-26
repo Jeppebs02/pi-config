@@ -1,5 +1,6 @@
 ---
 name: ghost-bits-cast-attack
+disable-model-invocation: true
 description: >-
   Java "Ghost Bits" / Cast Attack playbook (Black Hat Asia 2026). Use when
   attacking Java services where 16-bit char is silently narrowed to 8-bit byte

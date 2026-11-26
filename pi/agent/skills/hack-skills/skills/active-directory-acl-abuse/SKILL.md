@@ -1,5 +1,6 @@
 ---
 name: active-directory-acl-abuse
+disable-model-invocation: true
 description: >-
   Active Directory ACL abuse playbook. Use when exploiting misconfigured AD permissions including GenericAll, WriteDACL, DCSync rights, shadow credentials, LAPS reading, GPO abuse, and BloodHound-guided attack paths.
 ---

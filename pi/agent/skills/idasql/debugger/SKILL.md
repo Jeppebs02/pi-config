@@ -1,5 +1,6 @@
 ---
 name: debugger
+disable-model-invocation: true
 description: "IDA debugger operations. Use when asked to set breakpoints, patch bytes, add conditions, or manage a patch inventory."
 allowed-tools:
   - Bash

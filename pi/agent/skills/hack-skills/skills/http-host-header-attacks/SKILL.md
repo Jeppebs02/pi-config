@@ -1,5 +1,6 @@
 ---
 name: http-host-header-attacks
+disable-model-invocation: true
 description: >-
   HTTP Host header injection and routing abuse playbook. Use when the application
   trusts the Host header for generating URLs, routing requests, or access control

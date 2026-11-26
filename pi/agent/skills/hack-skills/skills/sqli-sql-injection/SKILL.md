@@ -1,5 +1,6 @@
 ---
 name: sqli-sql-injection
+disable-model-invocation: true
 description: >-
   SQL injection playbook. Use when input reaches SQL queries, authentication logic, sorting, filtering, reporting, or DB-specific blind and out-of-band execution paths.
 ---

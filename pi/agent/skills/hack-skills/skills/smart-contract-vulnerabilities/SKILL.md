@@ -1,5 +1,6 @@
 ---
 name: smart-contract-vulnerabilities
+disable-model-invocation: true
 description: >-
   Smart contract vulnerability playbook. Use when auditing Solidity/EVM contracts for reentrancy, integer overflow, access control, delegatecall, flash loan, signature replay, and MEV-related attack patterns.
 ---

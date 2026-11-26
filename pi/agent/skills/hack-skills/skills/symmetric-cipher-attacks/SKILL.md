@@ -1,5 +1,6 @@
 ---
 name: symmetric-cipher-attacks
+disable-model-invocation: true
 description: >-
   Symmetric cipher attack playbook. Use when exploiting block cipher mode
   weaknesses (CBC padding oracle, ECB cut-and-paste, bit flipping), stream

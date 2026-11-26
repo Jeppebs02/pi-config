@@ -1,5 +1,6 @@
 ---
 name: path-traversal-lfi
+disable-model-invocation: true
 description: >-
   Path traversal and LFI playbook. Use when file paths, download endpoints, include operations, archive extraction, or wrapper behavior may expose filesystem control.
 ---

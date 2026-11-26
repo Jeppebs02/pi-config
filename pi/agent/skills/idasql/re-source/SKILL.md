@@ -1,5 +1,6 @@
 ---
 name: re-source
+disable-model-invocation: true
 description: "Re-source IDA binaries. Use when asked for recursive annotation, structure recovery, type reconstruction, or bottom-up program understanding."
 metadata:
   argument-hint: "[function-name or address]"

@@ -1,5 +1,6 @@
 ---
 name: xrefs
+disable-model-invocation: true
 description: "Analyze IDA cross-references. Use when asked about callers, callees, imports, data refs, call graphs, or dependency chains."
 metadata:
   argument-hint: "[function-name or address]"

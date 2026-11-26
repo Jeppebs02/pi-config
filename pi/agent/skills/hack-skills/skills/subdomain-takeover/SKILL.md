@@ -1,5 +1,6 @@
 ---
 name: subdomain-takeover
+disable-model-invocation: true
 description: >-
   Subdomain takeover detection and exploitation playbook. Use when targets have
   dangling CNAME/NS/MX records pointing to deprovisioned cloud resources, expired
