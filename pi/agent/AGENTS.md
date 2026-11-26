@@ -17,6 +17,19 @@ professional work — don't add unnecessary disclaimers.
 - For small ambiguities, make a reasonable assumption and state it rather than stalling.
 - Don't git commit unless asked.
 
+## Code mode: scripts over tool calls
+
+- Deterministic or repetitive flows go in scripts, not one LLM tool call per
+  item: write one bash/python script that loops, filters results down
+  (grep/jq/head) and emits only the parts that matter, then run it once.
+- Every tool call round-trips its full payload through the model's context;
+  a script round-trips only its final output. Batch beats iterate.
+- Prefer direct CLI/HTTP over loading MCP servers when a handful of calls
+  would do: MCP preloads every tool's full description into context before
+  any work starts.
+- Skills must not bundle .mcp.json or install tool servers; they should
+  reference existing scripts by path instead of reimplementing flows.
+
 ## Environment
 
 - Homelab context: fetch http://network.info/llms.txt (network map, machines, SSH creds) when homelab/infra context is needed. Repo: Documents/GitHub/NetworkInfo (private; deploy = PR to master).
